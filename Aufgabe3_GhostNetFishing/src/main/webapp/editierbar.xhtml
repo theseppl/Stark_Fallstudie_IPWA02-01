@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<title>Aufgabenliste</title>
+</h:head>
+<h:body>
+	<h1>Aufgabenliste ändern</h1>
+	<h:form>
+		<p:dataTable var="aufgabe" value="#{aufgabenListe.liste}">
+			<p:column headerText="Text">
+				<p:inputText value="#{aufgabe.text}" required="true"/>
+			</p:column>
+			<p:column headerText="Person">
+				<p:inputText value="#{aufgabe.person}" />
+			</p:column>
+			<p:column headerText="Fällig am">
+				<p:datePicker id="faelligAm" value="#{aufgabe.faelligAm}" />
+			</p:column>
+			<p:column headerText="Erledigt">
+				<p:toggleSwitch value="#{aufgabe.erledigt}" />
+			</p:column>
+			<p:column headerText="Aufwand (h)">
+				<h:inputHidden id="aufwand" value="#{aufgabe.aufwand}" />
+				<p:outputLabel id="output" value="#{aufgabe.aufwand}" />
+				<p:slider for="aufwand" display="output" minValue="1" maxValue="40" />
+			</p:column>
+		</p:dataTable>
+		<p:messages id="messages">
+		 	<p:autoUpdate/>
+		</p:messages>	
+		<p:commandButton value="Speichern" icon="pi pi-check" action="#{controller.stopEdit()}" />
+	</h:form>
+</h:body>
+</html>
