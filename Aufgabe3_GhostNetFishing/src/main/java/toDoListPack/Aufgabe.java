@@ -1,6 +1,5 @@
 package toDoListPack;
 
-// Kommentar zum Commit-Test II
 import java.util.Date;
 import jakarta.persistence.*;
 
