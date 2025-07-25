@@ -27,7 +27,7 @@ public class AufgabenListeController
     }
     
     public String stopEdit() {
-    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("todoAppPersistenceUnit");
+    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
     	
     	EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
