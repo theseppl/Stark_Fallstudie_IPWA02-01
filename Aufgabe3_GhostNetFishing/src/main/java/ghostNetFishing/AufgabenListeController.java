@@ -1,4 +1,4 @@
-package toDoListPack;
+package ghostNetFishing;
 
 import java.io.Serializable;
 import jakarta.faces.view.ViewScoped;

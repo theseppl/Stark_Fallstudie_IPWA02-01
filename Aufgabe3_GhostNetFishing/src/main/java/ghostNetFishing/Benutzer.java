@@ -1,4 +1,4 @@
-package toDoListPack;
+package ghostNetFishing;
 
 public class Benutzer {
 	String name;

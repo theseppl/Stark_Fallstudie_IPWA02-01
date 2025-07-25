@@ -1,4 +1,4 @@
-package toDoListPack;
+package ghostNetFishing;
 
 import java.util.Date;
 import jakarta.persistence.*;

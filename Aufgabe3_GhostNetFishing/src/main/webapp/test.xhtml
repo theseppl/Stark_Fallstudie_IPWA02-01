@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Geisternetz melden</title>
+</h:head>
+<h:body>
+
+    <h:form>
+
+        <p:panel header="Geisternetz melden" styleClass="ui-panel ui-widget">
+
+            <p:messages id="messages" showDetail="true" />
+
+            <p:fieldset legend="Standort">
+                <p:inputText id="koordinaten" value="#{netzBean.gps}" required="true" label="GPS-Koordinaten" placeholder="z. B. 53.582, 7.211" />
+            </p:fieldset>
+
+            <p:fieldset legend="Größe">
+                <p:inputText id="groesse" value="#{netzBean.size}" required="true" label="Geschätzte Größe (in m²)" />
+            </p:fieldset>
+
+            <p:fieldset legend="Status">
+                <p:selectOneMenu id="status" value="#{netzBean.status}" required="true">
+                    <f:selectItem itemLabel="Bitte wählen…" itemValue="" />
+                    <f:selectItem itemLabel="Gemeldet" itemValue="GEMELDET" />
+                </p:selectOneMenu>
+            </p:fieldset>
+
+            <p:fieldset legend="Meldende Person">
+                <p:selectBooleanCheckbox id="anonym" value="#{netzBean.anonym}" itemLabel="Ich möchte anonym melden" />
+
+                <p:outputLabel for="name" value="Name:" />
+                <p:inputText id="name" value="#{netzBean.name}" required="#{!netzBean.anonym}" />
+
+                <p:outputLabel for="telefon" value="Telefonnummer:" />
+                <p:inputText id="telefon" value="#{netzBean.phone}" required="#{!netzBean.anonym}" />
+            </p:fieldset>
+
+            <p:separator/>
+
+            <p:commandButton value="Geisternetz melden"
+                             action="#{netzBean.submit}"
+                             update="messages"
+                             icon="pi pi-check" />
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>
