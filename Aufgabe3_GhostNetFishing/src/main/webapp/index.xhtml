@@ -4,81 +4,106 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	
-<h:head>
 	<h:outputStylesheet library="css" name="style.css" />
+	
+<h:head>
 	<title>Willkommen bei Shea Sepherd</title>
 </h:head>
+
 <h:body>
-<div class="card">
-    <h:panelGrid columns="2" style="vertical-align: middle; align-items: center;">
-    <p:graphicImage name="whaleLogo.png" library="images" width="40" />
-    <h:outputText value="Shea Sepherd – Ghost Net Fishing" styleClass="logoTitle" />
-</h:panelGrid>
-</div>
-<div class="card">
-    <h:form>
-    <!-- <p:growl id="messages"/> -->
-        
-        <p:menubar hideDelay="1000">
-            <p:submenu label="File" icon="pi pi-fw pi-file">
-                <p:submenu label="New" icon="pi pi-fw pi-plus">
-                    <p:menuitem value="Bookmark" icon="pi pi-fw pi-bookmark"/>
-                    <p:menuitem value="Video" icon="pi pi-fw pi-video"/>
-                </p:submenu>
-                <p:menuitem value="Delete" icon="pi pi-fw pi-trash"/>
-                <p:divider />
-                <p:menuitem value="Export" icon="pi pi-fw pi-external-link"/>
-                <p:menuitem value="Duplicate" icon="pi pi-fw pi-copy" disabled="true"/>
-            </p:submenu>
 
-            <p:submenu label="Edit" icon="pi pi-fw pi-pencil">
-                <p:menuitem value="Left" icon="pi pi-fw pi-align-left"/>
-                <p:menuitem value="Right" icon="pi pi-fw pi-align-right"/>
-                <p:menuitem value="Center" icon="pi pi-fw pi-align-center"/>
-                <p:menuitem value="Justify" icon="pi pi-fw pi-align-justify"/>
-            </p:submenu>
+	<div class="card">
+	    <h:form>
+	    <!-- <p:growl id="messages"/> -->
+	        
+	        <p:menubar hideDelay="1000">
+	            <p:submenu label="File" icon="pi pi-fw pi-file">
+	                <p:submenu label="New" icon="pi pi-fw pi-plus">
+	                    <p:menuitem value="Bookmark" icon="pi pi-fw pi-bookmark"/>
+	                    <p:menuitem value="Video" icon="pi pi-fw pi-video"/>
+	                </p:submenu>
+	                <p:menuitem value="Delete" icon="pi pi-fw pi-trash"/>
+	                <p:divider />
+	                <p:menuitem value="Export" icon="pi pi-fw pi-external-link"/>
+	                <p:menuitem value="Duplicate" icon="pi pi-fw pi-copy" disabled="true"/>
+	            </p:submenu>
+	
+	            <p:submenu label="Edit" icon="pi pi-fw pi-pencil">
+	                <p:menuitem value="Left" icon="pi pi-fw pi-align-left"/>
+	                <p:menuitem value="Right" icon="pi pi-fw pi-align-right"/>
+	                <p:menuitem value="Center" icon="pi pi-fw pi-align-center"/>
+	                <p:menuitem value="Justify" icon="pi pi-fw pi-align-justify"/>
+	            </p:submenu>
+	
+	            <p:submenu label="Users" icon="pi pi-fw pi-user">
+	                <p:menuitem value="New" icon="pi pi-fw pi-user-plus"/>
+	                <p:menuitem value="Delete" icon="pi pi-fw pi-user-minus"/>
+	                <p:submenu label="Search" icon="pi pi-fw pi-users">
+	                    <p:submenu label="Filter" icon="pi pi-fw pi-filter">
+	                        <p:menuitem value="Print" icon="pi pi-fw pi-print"/>
+	                    </p:submenu>
+	                    <p:menuitem value="List" icon="pi pi-fw pi-bars"/>
+	                </p:submenu>
+	            </p:submenu>
+	
+	            <p:submenu label="Events" icon="pi pi-fw pi-calendar">
+	                <p:submenu label="Edit" icon="pi pi-fw pi-pencil">
+	                    <p:menuitem value="Save" icon="pi pi-fw pi-calendar-plus"/>
+	                    <p:menuitem value="Delete" icon="pi pi-fw pi-calendar-minus"/>
+	                </p:submenu>
+	                <p:submenu label="Archieve" icon="pi pi-fw pi-calendar-times">
+	                    <p:menuitem value="Remove" icon="pi pi-fw pi-calendar-minus"/>
+	                </p:submenu>
+	            </p:submenu>
+	            
+	            <p:menuitem value="Impressum" icon="pi pi-fw pi-book"/>
+	
+	            <p:divider layout="vertical"/>
+	
+	            <p:menuitem value="Anmelden" icon="pi pi-fw pi-sign-in"/>
+	
+	            <f:facet name="end">
+	                <div class="ui-input-icon-left mr-2">
+	                    <i class="pi pi-fw pi-search" />
+	                    <p:inputText placeholder="Search"/>
+	                </div>
+	                <p:button value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
+	            </f:facet>
+	        </p:menubar>
+	    </h:form>
+	</div>
 
-            <p:submenu label="Users" icon="pi pi-fw pi-user">
-                <p:menuitem value="New" icon="pi pi-fw pi-user-plus"/>
-                <p:menuitem value="Delete" icon="pi pi-fw pi-user-minus"/>
-                <p:submenu label="Search" icon="pi pi-fw pi-users">
-                    <p:submenu label="Filter" icon="pi pi-fw pi-filter">
-                        <p:menuitem value="Print" icon="pi pi-fw pi-print"/>
-                    </p:submenu>
-                    <p:menuitem value="List" icon="pi pi-fw pi-bars"/>
-                </p:submenu>
-            </p:submenu>
+	<div class="card">
+	    <h:panelGrid columns="2" style="vertical-align: middle; align-items: center;">
+	    <p:graphicImage name="whaleLogo.png" library="images" width="40" />
+	    <h:outputText value="Shea Sepherd – Ghost Net Fishing" styleClass="logoTitle" />
+		</h:panelGrid>
+	</div>
 
-            <p:submenu label="Events" icon="pi pi-fw pi-calendar">
-                <p:submenu label="Edit" icon="pi pi-fw pi-pencil">
-                    <p:menuitem value="Save" icon="pi pi-fw pi-calendar-plus"/>
-                    <p:menuitem value="Delete" icon="pi pi-fw pi-calendar-minus"/>
-                </p:submenu>
-                <p:submenu label="Archieve" icon="pi pi-fw pi-calendar-times">
-                    <p:menuitem value="Remove" icon="pi pi-fw pi-calendar-minus"/>
-                </p:submenu>
-            </p:submenu>
+	<p:card style="width: 90%; padding: 50px;">
+	  <div style="display: flex; align-items: flex-start; gap: 40px;">
+	    <!-- Textbereich -->
+	    <div style="flex: 1;">
+	      <!-- <h:outputText value="Willkommen bei Sea Shepherd!" styleClass="title" /> -->
+	      <h:outputText value="Willkommen bei Sea Shepherd!" style="font-size: 24px; font-weight: bold;" />
+	      
+	      <p>
+	        Sea Shepherd kämpft aktiv gegen Geisternetze – verlorene Fischernetze aus Plastik, die Tiere fangen und Meere verschmutzen.
+	        Seit 2017 wurden über 23 Tonnen geborgen und wiederverwertet. Unterstützen Sie uns im Kampf gegen diese Gefahr.
+	      </p>
+	<div style="display: flex; gap: 15px;">
+	    <p:button value="Neues Geisternetz melden" styleClass="ui-button-danger" />
+	    <p:button value="Geisternetz bergen" styleClass="ui-button-warning" disabled="true"/>
+	    <p:button value="Geisternetz als geborgen melden" styleClass="ui-button-success" disabled="true"/>
+	</div>
+	    </div>
+	
+	    <!-- Bildbereich -->
+	    <div>
+	      <p:graphicImage name="ghostNet_1.jpg" library="images" width="300" />
+	    </div>
 
-            <p:divider layout="vertical"/>
-
-            <p:menuitem value="Anmelden" icon="pi pi-fw pi-sign-in"/>
-
-            <f:facet name="end">
-                <div class="ui-input-icon-left mr-2">
-                    <i class="pi pi-fw pi-search" />
-                    <p:inputText placeholder="Search"/>
-                </div>
-                <p:button value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
-            </f:facet>
-        </p:menubar>
-    </h:form>
-</div>
-    <div class="content">
-      <h:outputText value="Willkommen bei Shea Sepherd!" styleClass="title" />
-      <p>Hier findest du ein bisschen Text und zwei Bilder – ganz entspannt und übersichtlich.</p>
-      
-      <img src="bild1.jpg" alt="Mein erstes Bild" />
-      <img src="bild2.jpg" alt="Noch ein schönes Bild" />
-    </div>
+	  </div>
+	</p:card>
 </h:body>
 </html>
