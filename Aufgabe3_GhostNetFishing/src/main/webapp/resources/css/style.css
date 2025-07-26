@@ -9,3 +9,12 @@
     color: #004080;
     margin-left: 10px;
 }
+
+/*Überschrift */
+.title {
+    font-family: 'Pacifico', cursive;
+    font-size: 22px;
+    font-weight: normal;
+    color: #004080;
+    margin-left: 10px;
+}
