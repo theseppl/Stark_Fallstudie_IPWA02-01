@@ -17,6 +17,7 @@
 	    <!-- <p:growl id="messages"/> -->
 	        
 	        <p:menubar hideDelay="1000">
+	        	<p:menuitem value="Startseite" icon="pi pi-fw pi-home" action="#{actionController.index}" />
 	            <p:submenu label="File" icon="pi pi-fw pi-file">
 	                <p:submenu label="New" icon="pi pi-fw pi-plus">
 	                    <p:menuitem value="Bookmark" icon="pi pi-fw pi-bookmark"/>
@@ -81,7 +82,7 @@
 	</div>
 
 	<p:card style="width: 90%; padding: 50px;">
-	  <div style="display: flex; align-items: flex-start; gap: 40px;">
+
 	    <!-- Textbereich -->
 	    <div style="flex: 1;">
 	      <!-- <h:outputText value="Willkommen bei Sea Shepherd!" styleClass="title" /> -->
@@ -90,17 +91,7 @@
 	      <p>
 	        IMPRESSUM
 	      </p>
-	<div style="display: flex; gap: 15px;">
-	    <p:button icon="pi pi-bell" value="Neues Geisternetz melden" styleClass="ui-button-danger"/>
-	    <p:button icon="pi pi-bolt" value="Geisternetz bergen" styleClass="ui-button-warning" disabled="true"/>
-	    <p:button icon="pi pi-check-circle" value="Geisternetz als geborgen melden" styleClass="ui-button-success" disabled="true"/>
-	</div>
-	    </div>
-	
-	    <!-- Bildbereich -->
-	    <div>
-	      <p:graphicImage name="ghostNet_1.jpg" library="images" width="400" />
-	    </div>
+
 
 	  </div>
 	</p:card>

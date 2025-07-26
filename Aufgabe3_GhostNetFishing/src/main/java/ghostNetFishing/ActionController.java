@@ -25,6 +25,10 @@ public class ActionController
 	public String impressum() {
         return "impressum";
     }
+	
+	public String index() {
+        return "index";
+    }
  
 /*	
     public String stopEdit() {
