@@ -1,0 +1,65 @@
+/* 🌊 Google Fonts für maritime Eleganz */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;700&display=swap');
+
+/* 🐋 Logo & Titel */
+.logoTitle {
+    font-family: 'Pacifico', cursive;
+    font-size: 28px;
+    font-weight: normal;
+    color: #004080;
+    margin-left: 10px;
+}
+
+/* 🧭 Menütext links neben MegaMenu */
+.menuText {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    margin-right: 20px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/* 📦 MegaMenu Styling */
+.customMegaMenu {
+    width: 100%;
+    background-color: #e6f2ff;
+    border: none;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 🔍 Suchfeld & Logout-Button */
+.ui-input-icon-left .pi-search {
+    color: #666;
+}
+
+.ui-button-info {
+    background-color: #007acc;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* 🧱 Header mit Logo & Titel */
+.headerGrid {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* 📱 Responsive Anpassung */
+@media screen and (max-width: 768px) {
+    .logoTitle {
+        font-size: 22px;
+    }
+    .menuText {
+        font-size: 16px;
+    }
+    .customMegaMenu {
+        padding: 8px 12px;
+    }
+}
