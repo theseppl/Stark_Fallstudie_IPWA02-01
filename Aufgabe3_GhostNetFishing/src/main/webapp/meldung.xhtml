@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:outputStylesheet library="css" name="style.css" />
+
+<h:head>
+	<title>Netz melden</title>
+</h:head>
+
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+	<div class="card">
+		<h:form>
+			<!-- <p:growl id="messages"/> -->
+
+			<p:menubar hideDelay="1000">
+				<p:menuitem value="Startseite" icon="pi pi-fw pi-home"
+					action="#{actionController.index}" />
+				<p:submenu label="File" icon="pi pi-fw pi-file">
+					<p:submenu label="New" icon="pi pi-fw pi-plus">
+						<p:menuitem value="Bookmark" icon="pi pi-fw pi-bookmark" />
+						<p:menuitem value="Video" icon="pi pi-fw pi-video" />
+					</p:submenu>
+					<p:menuitem value="Delete" icon="pi pi-fw pi-trash" />
+					<p:divider />
+					<p:menuitem value="Export" icon="pi pi-fw pi-external-link" />
+					<p:menuitem value="Duplicate" icon="pi pi-fw pi-copy"
+						disabled="true" />
+				</p:submenu>
+
+				<p:submenu label="Edit" icon="pi pi-fw pi-pencil">
+					<p:menuitem value="Left" icon="pi pi-fw pi-align-left" />
+					<p:menuitem value="Right" icon="pi pi-fw pi-align-right" />
+					<p:menuitem value="Center" icon="pi pi-fw pi-align-center" />
+					<p:menuitem value="Justify" icon="pi pi-fw pi-align-justify" />
+				</p:submenu>
+
+				<p:submenu label="Users" icon="pi pi-fw pi-user">
+					<p:menuitem value="New" icon="pi pi-fw pi-user-plus" />
+					<p:menuitem value="Delete" icon="pi pi-fw pi-user-minus" />
+					<p:submenu label="Search" icon="pi pi-fw pi-users">
+						<p:submenu label="Filter" icon="pi pi-fw pi-filter">
+							<p:menuitem value="Print" icon="pi pi-fw pi-print" />
+						</p:submenu>
+						<p:menuitem value="List" icon="pi pi-fw pi-bars" />
+					</p:submenu>
+				</p:submenu>
+
+				<p:submenu label="Events" icon="pi pi-fw pi-calendar">
+					<p:submenu label="Edit" icon="pi pi-fw pi-pencil">
+						<p:menuitem value="Save" icon="pi pi-fw pi-calendar-plus" />
+						<p:menuitem value="Delete" icon="pi pi-fw pi-calendar-minus" />
+					</p:submenu>
+					<p:submenu label="Archieve" icon="pi pi-fw pi-calendar-times">
+						<p:menuitem value="Remove" icon="pi pi-fw pi-calendar-minus" />
+					</p:submenu>
+				</p:submenu>
+
+				<p:menuitem value="Impressum" icon="pi pi-fw pi-book" />
+
+				<p:divider layout="vertical" />
+
+				<p:menuitem value="Anmelden" icon="pi pi-fw pi-sign-in" />
+
+				<f:facet name="end">
+					<div class="ui-input-icon-left mr-2">
+						<i class="pi pi-fw pi-search" />
+						<p:inputText placeholder="Search" />
+					</div>
+					<p:button value="Logout" icon="pi pi-fw pi-sign-out"
+						styleClass="ui-button-info" />
+				</f:facet>
+			</p:menubar>
+		</h:form>
+	</div>
+
+	<div class="card">
+		<h:panelGrid columns="2"
+			style="vertical-align: middle; align-items: center;">
+			<p:graphicImage name="whaleLogo.png" library="images" width="40" />
+			<h:outputText value="Shea Sepherd – Ghost Net Fishing"
+				styleClass="logoTitle" />
+		</h:panelGrid>
+	</div>
+
+	<p:card style="width: 90%; padding: 50px;">
+
+		<p:accordionPanel widgetVar="basic" scrollIntoView="center">
+			<p:tab
+				title="Breitengrad Fundort - GMS-Format Beispiel: N 53° 27' 18.45&quot;">
+
+
+				<h:form>
+					<h:outputStylesheet library="css" name="style.css" />
+					<h:panelGrid columns="8" cellpadding="8" style="vertical-align:top">
+
+						<!-- Radionbuttons Hemisphäre -->
+						<h:panelGroup>
+							<p:selectOneRadio id="page" value="#{radioView.page}"
+								layout="grid" columns="2">
+								<f:selectItem itemLabel="Nord" itemValue="Option1" />
+								<f:selectItem itemLabel="Süd" itemValue="Option2" />
+							</p:selectOneRadio>
+							<h:outputText value="Hemisphäre"
+								style="font-size:small; color:gray; margin-top:4px; display:block; text-align:center;" />
+						</h:panelGroup>
+
+						<!-- Slider Breitengrad Grad -->
+						<h:panelGroup>
+							<p:inputText id="lat_degree" value="#{sliderView.number1}"
+								style="width:80px" />
+							<p:slider for="lat_degree" minValue="0" maxValue="90"
+								style="width:80px; margin-top:4px;" />
+							<h:outputText value="° (Grad)"
+								style="font-size:small; color:gray; margin-top:4px;" />
+						</h:panelGroup>
+
+						<!-- Slider Breitengrad Minuten -->
+						<h:panelGroup>
+							<p:inputText id="lat_minute" value="#{sliderView.number2}"
+								style="width:80px" />
+							<p:slider for="lat_minute" minValue="0" maxValue="59"
+								style="width:80px; margin-top:4px;" />
+							<h:outputText value="' (Minuten)"
+								style="font-size:small; color:gray; margin-top:4px;" />
+						</h:panelGroup>
+
+						<!-- Slider Breitengrad Sekunden -->
+						<h:panelGroup>
+							<p:inputText id="lat_seconds" value="#{sliderView.number3}"
+								style="width:80px" />
+							<p:slider for="lat_seconds" minValue="0" maxValue="59"
+								style="width:80px; margin-top:4px;" />
+							<h:outputText value="″ (Sekunden)"
+								style="font-size:small; color:gray; margin-top:4px;" />
+						</h:panelGroup>
+
+					</h:panelGrid>
+				</h:form>
+
+
+				<!--  
+				<h:form>
+					<h5>Geographische Breite</h5>
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:selectOneRadio id="page" value="#{radioView.page}"
+							layout="pageDirection">
+							<f:selectItem itemLabel="Nord" itemValue="Option1" />
+							<f:selectItem itemLabel="Süd" itemValue="Option2" />
+						</p:selectOneRadio>
+						<h:outputText
+							value="Hemisphäre"
+							style="font-size:small; color:gray;" />
+
+						<h:panelGrid columns="1" style="margin-bottom: 10px">
+							<p:inputText id="sliderTxtMin" value="#{sliderView.number1}"
+								style="width:90px" />
+							<p:slider for="sliderTxtMin" minValue="0" maxValue="90"
+								style="width:90px" styleClass="customSlider" />
+						</h:panelGrid>
+					</h:panelGrid>
+				</h:form>
+				
+				-->
+			</p:tab>
+			<p:tab title="Header II">
+				<p class="m-0">Sed ut perspiciatis unde omnis iste natus error
+					sit voluptatem accusantium doloremque laudantium, totam rem
+					aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+					architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+					voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed
+					quia consequuntur magni dolores eos qui ratione voluptatem sequi
+					nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
+					modi.</p>
+			</p:tab>
+			<p:tab title="Header III">
+				<p class="m-0">At vero eos et accusamus et iusto odio
+					dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+					atque corrupti quos dolores et quas molestias excepturi sint
+					occaecati cupiditate non provident, similique sunt in culpa qui
+					officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
+					harum quidem rerum facilis est et expedita distinctio. Nam libero
+					tempore, cum soluta nobis est eligendi optio cumque nihil impedit
+					quo minus.</p>
+			</p:tab>
+		</p:accordionPanel>
+
+
+
+	</p:card>
+</h:body>
+</html>

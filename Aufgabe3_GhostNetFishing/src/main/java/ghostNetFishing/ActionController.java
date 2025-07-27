@@ -29,6 +29,10 @@ public class ActionController
 	public String index() {
         return "index";
     }
+	
+	public String notification() {
+        return "meldung";
+    }
  
 /*	
     public String stopEdit() {
