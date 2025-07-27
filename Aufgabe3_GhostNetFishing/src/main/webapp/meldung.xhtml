@@ -190,30 +190,50 @@
 			</p:tab>
 			<p:tab title="Größe des Netzes und Sichtungsdatum">
 				<h:form>
-					<h:panelGrid columns="8" cellpadding="8" style="vertical-align:top">
-
+					<h:panelGrid columns="4" cellpadding="8" style="vertical-align:top">
 
 						<!-- Slider Netzgröße -->
 						<h:panelGroup>
 							<p:inputText id="net_size" value="#{sliderView.number7}"
-								style="width:200px" />
-							<p:slider for="net_size" minValue="0" maxValue="999999"
+								style="width:200px; margin-top:1px;" />
+							<p:slider for="net_size" minValue="1" maxValue="50000"
 								style="width:200px; margin-top:4px;" />
 							<h:outputText value="m²"
 								style="font-size:small; color:gray; margin-top:4px;" />
 						</h:panelGroup>
-						<div class="field col-12 md:col-4">
-							<p:outputLabel for="german" value="German" />
+
+						<!-- Kalender -->
+						<h:panelGroup>
 							<h:outputScript name="locales/locale-de.js" library="primefaces" />
 							<p:datePicker id="german" value="#{calendarView.dateDe}"
-								locale="de" monthNavigator="true" pattern="dd.MM.yyyy" />
-						</div>
-
+								locale="de" monthNavigator="true" pattern="dd.MM.yyyy"
+								showIcon="true" style="margin-top:-11px;" />
+							<h:outputText value="Sichtungsdatum"
+								style="font-size:small; color:gray; margin-top:4px; display:block;" />
+						</h:panelGroup>
 					</h:panelGrid>
 				</h:form>
 			</p:tab>
 		</p:accordionPanel>
 
+
+		<h:panelGrid>
+
+			<h5>Geisternetz anonym melden?</h5>
+			<p:toggleSwitch value="1" />
+
+		</h:panelGrid>
+
+		<h:form>
+			<p:commandButton value="Bestätigen" icon="pi pi-check-circle"
+				style="margin-top:22px" />
+
+
+			<p:commandButton value="Abbrechen" icon="pi pi-times-circle"
+				styleClass="ui-button-secondary"
+				style="margin-top:22px; margin-left:10px"
+				action="#{actionController.index}" ajax="false" />
+		</h:form>
 
 
 	</p:card>
