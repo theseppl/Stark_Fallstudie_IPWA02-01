@@ -216,25 +216,20 @@
 			</p:tab>
 		</p:accordionPanel>
 
-
-		<h:panelGrid>
-
-			<h5>Geisternetz anonym melden?</h5>
-			<p:toggleSwitch value="1" />
-
-		</h:panelGrid>
-
 		<h:form>
+			<h:panelGrid style="margin-top:22px">
+				<h5>Geisternetz anonym melden?</h5>
+				<p:toggleSwitch value="1" style="margin-top:-22px" />
+			</h:panelGrid>
+
 			<p:commandButton value="Bestätigen" icon="pi pi-check-circle"
 				style="margin-top:22px" />
-
 
 			<p:commandButton value="Abbrechen" icon="pi pi-times-circle"
 				styleClass="ui-button-secondary"
 				style="margin-top:22px; margin-left:10px"
 				action="#{actionController.index}" ajax="false" />
 		</h:form>
-
 
 	</p:card>
 </h:body>
