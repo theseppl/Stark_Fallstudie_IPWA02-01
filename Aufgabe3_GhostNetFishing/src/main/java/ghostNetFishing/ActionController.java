@@ -14,7 +14,8 @@ import jakarta.inject.Named;
 public class ActionController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
+    /* Netz Daten
     private LocalDate dateDe;
     private LocalDate today = LocalDate.now();
     private int latituteSliderDegree;
@@ -126,6 +127,15 @@ public class ActionController implements Serializable {
         return Date.from(dateDe.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
+  */ 
+    
+    
+    
+    
+    
+    
+    
+
     // Navigation
     public String impressum() {
         return "impressum";
@@ -138,5 +148,9 @@ public class ActionController implements Serializable {
     public String notification() {
         return "meldungen";
     }
+    
+    
+    
+    
     
 }
