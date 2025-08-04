@@ -101,24 +101,32 @@
 
                 <!-- TAB 3: Netzgröße & Datum -->
                 <p:tab title="Größe des Netzes und Sichtungsdatum">
-                    <h:panelGrid columns="4" cellpadding="8" style="vertical-align:top">
+					<h:panelGrid columns="4" cellpadding="8" style="vertical-align:top">
 
-                        <h:panelGroup>
-                            <p:inputText id="net_size" value="#{actionController.netSizeSlider}" style="width:200px;" />
-                            <p:slider for="net_size" minValue="1" maxValue="50000" style="width:200px;" />
-                            <h:outputText value="m²" style="font-size:small; color:gray;" />
-                        </h:panelGroup>
+						<!-- Slider Netzgröße -->
+						<h:panelGroup>
+							<p:inputText id="net_size" value="#{actionController.netSizeSlider}"
+								style="width:200px; margin-top:1px;" />
+							<p:slider for="net_size" minValue="1" maxValue="50000"
+								style="width:200px; margin-top:4px;" />
+							<h:outputText value="m²"
+								style="font-size:small; color:gray; margin-top:4px;" />
+						</h:panelGroup>
 
-                        <h:panelGroup>
-                            <h:outputScript name="locales/locale-de.js" library="primefaces" />
-                            <p:datePicker id="german" value="#{actionController.dateDe}"
-                                          locale="de" monthNavigator="true" pattern="dd.MM.yyyy"
-                                          showIcon="true" style="margin-top:-25px" />
+						<!-- Kalender -->
+						<h:panelGroup>
+							<h:outputScript name="locales/locale-de.js" library="primefaces" />
+							<p:datePicker id="german" value="#{actionController.dateDe}"
+								locale="de" monthNavigator="true" pattern="dd.MM.yyyy"
+								showIcon="true" style="margin-top:-11px;"
+								maxDate="#{actionController.today}" />
 
-                            <h:outputText value="Sichtungsdatum: #{actionController.today}" style="font-size:small; color:gray;" />
-                        </h:panelGroup>
+							<h:outputText value="Sichtungsdatum: #{actionController.today}"
+								style="font-size:small; color:gray; margin-top:4px; display:block;" />
 
-                    </h:panelGrid>
+
+						</h:panelGroup>
+					</h:panelGrid>
                 </p:tab>
 
             </p:accordionPanel>
