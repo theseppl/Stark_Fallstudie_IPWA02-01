@@ -4,9 +4,10 @@ import java.time.LocalDate;
 import jakarta.inject.Named;
 import jakarta.persistence.*;
 
-@Named("net")
+
 @Entity
-public class Net {
+@Named("net")
+public class Netz {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int ID;
@@ -23,8 +24,25 @@ public class Net {
     private LocalDate dateDe;
     private LocalDate today = LocalDate.now();
     
-    public Net() {}
+    public Netz() {}
     
+	public Netz(int latituteSliderDegree, int latituteSliderMinute, int latituteSliderSeconds, int longituteSliderDegree,
+			int longituteSliderMinute, int longituteSliderSeconds, int netSizeSlider, String northSouthRadio,
+			String eastWestRadio, LocalDate dateDe, LocalDate today) {
+		super();
+		this.latituteSliderDegree = latituteSliderDegree;
+		this.latituteSliderMinute = latituteSliderMinute;
+		this.latituteSliderSeconds = latituteSliderSeconds;
+		this.longituteSliderDegree = longituteSliderDegree;
+		this.longituteSliderMinute = longituteSliderMinute;
+		this.longituteSliderSeconds = longituteSliderSeconds;
+		this.netSizeSlider = netSizeSlider;
+		this.northSouthRadio = northSouthRadio;
+		this.eastWestRadio = eastWestRadio;
+		this.dateDe = dateDe;
+		this.today = today;
+	}
+
 	public int getLatituteSliderDegree() {
 		return latituteSliderDegree;
 	}
