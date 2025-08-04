@@ -1,13 +1,16 @@
 package ghostNetFishing;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-
 import jakarta.inject.Named;
+import jakarta.persistence.*;
 
 @Named("net")
+@Entity
 public class Net {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int ID;
+	
     private int latituteSliderDegree;
     private int latituteSliderMinute;
     private int latituteSliderSeconds;
@@ -19,6 +22,8 @@ public class Net {
     private String eastWestRadio;
     private LocalDate dateDe;
     private LocalDate today = LocalDate.now();
+    
+    public Net() {}
     
 	public int getLatituteSliderDegree() {
 		return latituteSliderDegree;
