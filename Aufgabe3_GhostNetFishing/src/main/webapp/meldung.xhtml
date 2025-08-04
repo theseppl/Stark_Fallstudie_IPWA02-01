@@ -146,11 +146,16 @@
 						<!-- Kalender -->
 						<h:panelGroup>
 							<h:outputScript name="locales/locale-de.js" library="primefaces" />
-							<p:datePicker id="german" value="#{calendarView.dateDe}"
+							<p:datePicker id="german" value="#{actionController.dateDe}"
 								locale="de" monthNavigator="true" pattern="dd.MM.yyyy"
-								showIcon="true" style="margin-top:-11px;" />
-							<h:outputText value="Sichtungsdatum"
+								showIcon="true" style="margin-top:-11px;"
+								maxDate="#{actionController.todayLocal}" />
+							<h:outputText value="Sichtungsdatum: #{actionController.today}"
 								style="font-size:small; color:gray; margin-top:4px; display:block;" />
+
+							<h:outputText value="Datum ausgewählt: #{actionController.dateDe}" />
+							<h:outputText value="Maximaldatum: #{actionController.today}" />
+
 						</h:panelGroup>
 					</h:panelGrid>
 				</h:form>
