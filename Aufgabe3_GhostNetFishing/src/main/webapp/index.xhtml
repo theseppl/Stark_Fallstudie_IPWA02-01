@@ -4,7 +4,6 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
 
 <h:outputStylesheet library="css" name="style.css" />
 
@@ -13,11 +12,11 @@
 </h:head>
 
 <h:body>
-	
+
+	<!-- Menüleiste wird eingebunden. Dafür xmlns:ui="http://java.sun.com/jsf/facelets" notwendig. -->
 	<h:form>
-		<ui:include src="menubar.xhtml"/>
+		<ui:include src="menubar.xhtml" />
 	</h:form>
-	
 
 	<div class="card">
 		<h:panelGrid columns="2"
@@ -44,9 +43,8 @@
 					<p:commandButton icon="pi pi-bell" value="Neues Geisternetz melden"
 						styleClass="ui-button-danger"
 						action="#{actionController.notification}" />
-					<p:commandButton icon=" pi pi-bolt"
-						value="Geisternetz bergen" styleClass="ui-button-warning"
-						disabled="true" />
+					<p:commandButton icon=" pi pi-bolt" value="Geisternetz bergen"
+						styleClass="ui-button-warning" disabled="true" />
 					<p:commandButton icon="pi pi-check-circle"
 						value="Geisternetz als geborgen melden"
 						styleClass="ui-button-success" disabled="true" />
