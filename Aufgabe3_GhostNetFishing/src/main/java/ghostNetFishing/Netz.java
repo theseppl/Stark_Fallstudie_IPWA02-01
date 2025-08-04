@@ -109,5 +109,6 @@ public class Netz {
 	public void setToday(LocalDate today) {
 		this.today = today;
 	}  
+	
 }
 

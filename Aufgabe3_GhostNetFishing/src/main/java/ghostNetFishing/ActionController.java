@@ -146,7 +146,7 @@ public class ActionController implements Serializable {
     }
 
     public String notification() {
-        return "meldungen";
+        return "meldungenTest";
     }
     
     
