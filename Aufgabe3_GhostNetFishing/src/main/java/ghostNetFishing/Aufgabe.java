@@ -1,3 +1,4 @@
+/*
 package ghostNetFishing;
 
 import java.util.Date;
@@ -82,3 +83,4 @@ public class Aufgabe {
 
 	
 }
+*/

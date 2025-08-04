@@ -1,3 +1,4 @@
+/*
 package ghostNetFishing;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public class Aufgabenliste implements Serializable {
 	/**
 	 * 
 	 */
+/*
 	private static final long serialVersionUID = 1L;
 	private static Aufgabenliste instance = new Aufgabenliste();
 	private List<Aufgabe> liste = new ArrayList<Aufgabe>();
@@ -39,3 +41,4 @@ public class Aufgabenliste implements Serializable {
 		return liste;
 	}
 }
+*/

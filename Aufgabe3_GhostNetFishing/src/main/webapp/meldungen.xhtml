@@ -31,9 +31,11 @@
 			<h:panelGrid columns="1" style="vertical-align:top">
 
 				<!--Zeile 1: Hemisphäre + Breitengrad-->
+				<h3>Breitengrad</h3>
 				<h:panelGrid columns="4" cellpadding="8">
+					
 					<h:panelGroup style="display:block; width: 198px">
-						<p:selectOneRadio id="hemisphere" value="#{radioView.page}"
+						<p:selectOneRadio id="hemisphere" value="#{actionController.northSouthRadio}"
 							layout="pageDirection" columns="2">
 							<f:selectItem itemLabel="Nord" itemValue="Option1" />
 							<f:selectItem itemLabel="Süd" itemValue="Option2" />
@@ -43,7 +45,7 @@
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:inputText id="lat_degree" value="#{sliderView.number1}"
+						<p:inputText id="lat_degree" value="#{actionController.latituteSliderDegree}"
 							style="width:80px" />
 						<p:slider for="lat_degree" minValue="0" maxValue="90"
 							style="width:80px; margin-top:4px;" />
@@ -52,7 +54,7 @@
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:inputText id="lat_minute" value="#{sliderView.number2}"
+						<p:inputText id="lat_minute" value="#{actionController.latituteSliderMinute}"
 							style="width:80px" />
 						<p:slider for="lat_minute" minValue="0" maxValue="59"
 							style="width:80px; margin-top:4px;" />
@@ -61,7 +63,7 @@
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:inputText id="lat_seconds" value="#{sliderView.number3}"
+						<p:inputText id="lat_seconds" value="#{actionController.latituteSliderSeconds}"
 							style="width:80px" />
 						<p:slider for="lat_seconds" minValue="0" maxValue="59"
 							style="width:80px; margin-top:4px;" />
@@ -73,9 +75,10 @@
 				<p:divider />
 
 				<!-- Zeile 2: Längenzone + Längengrad -->
+				<h3>Längengrad</h3>
 				<h:panelGrid columns="4" cellpadding="8">
 					<h:panelGroup style="display:block; width: 198px">
-						<p:selectOneRadio id="zone" value="#{radioView.page}"
+						<p:selectOneRadio id="zone" value="#{actionController.eastWestRadio}"
 							layout="grid" columns="2">
 							<f:selectItem itemLabel="West" itemValue="Option1" />
 							<f:selectItem itemLabel="Ost" itemValue="Option2" />
@@ -85,7 +88,7 @@
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:inputText id="long_degree" value="#{sliderView.number4}"
+						<p:inputText id="long_degree" value="#{actionController.longituteSliderDegree}"
 							style="width:80px" />
 						<p:slider for="long_degree" minValue="0" maxValue="180"
 							style="width:80px; margin-top:4px;" />
@@ -94,7 +97,7 @@
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:inputText id="long_minute" value="#{sliderView.number5}"
+						<p:inputText id="long_minute" value="#{actionController.longituteSliderMinute}"
 							style="width:80px" />
 						<p:slider for="long_minute" minValue="0" maxValue="59"
 							style="width:80px; margin-top:4px;" />
@@ -103,7 +106,7 @@
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<p:inputText id="long_seconds" value="#{sliderView.number6}"
+						<p:inputText id="long_seconds" value="#{actionController.longituteSliderSeconds}"
 							style="width:80px" />
 						<p:slider for="long_seconds" minValue="0" maxValue="59"
 							style="width:80px; margin-top:4px;" />
@@ -115,9 +118,10 @@
 				<p:divider />
 
 				<!-- Zeile 3: Netzgröße + Datum -->
+				<h3>Größe und Datum</h3>
 				<h:panelGrid columns="2" cellpadding="8">
 					<h:panelGroup>
-						<p:inputText id="net_size" value="#{sliderView.number7}"
+						<p:inputText id="net_size" value="#{actionController.netSizeSlider}"
 							style="width:200px; margin-top:0px" />
 						<p:slider for="net_size" minValue="1" maxValue="50000"
 							style="width:200px; margin-top:4px;" />
@@ -145,18 +149,15 @@
 
 				<h:panelGrid columns="2">
 					<p:commandButton value="Bestätigen" icon="pi pi-check-circle"
-						actionListener="#{actionController.save}" update="@form" />
+						action="#{actionController.index}"/>
 
 					<p:commandButton value="Abbrechen" icon="pi pi-times-circle"
 						styleClass="ui-button-secondary" style="margin-left:10px"
-						action="#{actionController.index}" ajax="false" />
-
+						action="#{actionController.index}"/>
 				</h:panelGrid>
-
+				
 			</h:panelGrid>
 		</h:form>
-
 	</p:card>
-
 </h:body>
 </html>

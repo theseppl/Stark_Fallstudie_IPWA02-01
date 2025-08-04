@@ -1,3 +1,5 @@
+/*
+
 package ghostNetFishing;
 
 import java.io.Serializable;
@@ -17,6 +19,7 @@ public class AufgabenListeController
     /**
 	 * 
 	 */
+/*
 	private static final long serialVersionUID = 1L;
 	
 	@Inject 
@@ -38,3 +41,4 @@ public class AufgabenListeController
         return "aufgabenliste";
     }
 }
+*/
