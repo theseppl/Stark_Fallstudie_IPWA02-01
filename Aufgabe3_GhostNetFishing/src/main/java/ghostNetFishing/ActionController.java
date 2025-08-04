@@ -1,11 +1,14 @@
 package ghostNetFishing;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -24,39 +27,39 @@ public class ActionController
 	 */
 	private static final long serialVersionUID = 1L;
 	private Date dateDe;
-	private Date today;
+	private Date today = new Date();
+
 
 
 	
 //	@Inject 
 //	private Aufgabenliste aufgabenliste;
 
-	@PostConstruct
-	public void init() {
-	    Calendar cal = Calendar.getInstance();
-	    cal.set(Calendar.HOUR_OF_DAY, 0);
-	    cal.set(Calendar.MINUTE, 0);
-	    cal.set(Calendar.SECOND, 0);
-	    cal.set(Calendar.MILLISECOND, 0);
-	    today = cal.getTime();
+	public String getDateDe() {
+	    if (dateDe != null) {
+	        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+	        return sdf.format(dateDe);
+	    } else {
+	        return "";
+	    }
 	}
 
+/*
 	public Date getDateDe() {
-	    return dateDe;
+		return dateDe;
 	}
-	
-	public LocalDate getTodayLocal() {
-	    return LocalDate.now();
-	}
-
+	*/
 
 	public void setDateDe(Date dateDe) {
-	    this.dateDe = dateDe;
+		this.dateDe = dateDe;
 	}
 
 	public Date getToday() {
+		return today;
+	}
 
-	    return today;
+	public void setToday(Date today) {
+		this.today = today;
 	}
 
 	public String impressum() {
