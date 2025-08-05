@@ -7,13 +7,13 @@
 
 <h:outputStylesheet library="css" name="style.css" />
 
-
 <h:head>
 	<title>Netz melden</title>
 </h:head>
 
 <h:body>
-	<!-- Menüleiste wird eingebunden. Dafür xmlns:ui="http://java.sun.com/jsf/facelets" notwendig. -->
+
+	<!-- Menüleiste separat -->
 	<h:form>
 		<ui:include src="menubar.xhtml" />
 	</h:form>
@@ -28,114 +28,115 @@
 	</div>
 
 	<p:card style="width: 90%; padding: 50px;">
-		<p:accordionPanel widgetVar="basic" scrollIntoView="center">
-			<p:tab title="Breitengrad des Fundortes (N/S xx° xx' xx&quot;)">
+		<!-- Hauptformular -->
+		<h:form>
 
-				<h:form>
+			<p:accordionPanel widgetVar="basic" scrollIntoView="center">
+
+				<!-- TAB 1: Breitengrad -->
+				<p:tab title="Breitengrad des Fundortes (N/S xx° xx' xx&quot;)">
 					<h:panelGrid columns="8" cellpadding="8" style="vertical-align:top">
 
-						<!-- Radionbuttons Hemisphäre -->
 						<h:panelGroup>
-							<p:selectOneRadio id="page" value="#{radioView.page}"
+							<p:selectOneRadio id="latitude_zone"
+								value="#{netzController.netz.northSouth}"
 								layout="pageDirection" columns="2">
-								<f:selectItem itemLabel="Nord" itemValue="Option1" />
-								<f:selectItem itemLabel="Süd" itemValue="Option2" />
+								<f:selectItem itemLabel="Nord" itemValue="North" />
+								<f:selectItem itemLabel="Süd" itemValue="South" />
 							</p:selectOneRadio>
 							<h:outputText value="Hemisphäre"
-								style="font-size:small; color:gray; margin-top:4px; display:block; text-align:center;" />
+								style="font-size:small; color:gray; text-align:center;" />
 						</h:panelGroup>
 
-						<!-- Slider Breitengrad Grad -->
 						<h:panelGroup>
-							<p:inputText id="lat_degree" value="#{sliderView.number1}"
+							<p:inputText id="lat_degree"
+								value="#{netzController.netz.latituteDegree}"
 								style="width:80px" />
 							<p:slider for="lat_degree" minValue="0" maxValue="90"
-								style="width:80px; margin-top:4px;" />
+								style="width:80px;" />
 							<h:outputText value="° (Grad)"
-								style="font-size:small; color:gray; margin-top:4px;" />
+								style="font-size:small; color:gray;" />
 						</h:panelGroup>
 
-						<!-- Slider Breitengrad Minuten -->
 						<h:panelGroup>
-							<p:inputText id="lat_minute" value="#{sliderView.number2}"
+							<p:inputText id="lat_minute"
+								value="#{netzController.netz.latituteMinute}"
 								style="width:80px" />
 							<p:slider for="lat_minute" minValue="0" maxValue="59"
-								style="width:80px; margin-top:4px;" />
+								style="width:80px;" />
 							<h:outputText value="' (Minuten)"
-								style="font-size:small; color:gray; margin-top:4px;" />
+								style="font-size:small; color:gray;" />
 						</h:panelGroup>
 
-						<!-- Slider Breitengrad Sekunden -->
 						<h:panelGroup>
-							<p:inputText id="lat_seconds" value="#{sliderView.number3}"
+							<p:inputText id="lat_seconds"
+								value="#{net.latituteSeconds}"
 								style="width:80px" />
 							<p:slider for="lat_seconds" minValue="0" maxValue="59"
-								style="width:80px; margin-top:4px;" />
+								style="width:80px;" />
 							<h:outputText value="″ (Sekunden)"
-								style="font-size:small; color:gray; margin-top:4px;" />
+								style="font-size:small; color:gray;" />
 						</h:panelGroup>
 
 					</h:panelGrid>
-				</h:form>
+				</p:tab>
 
-			</p:tab>
-			<p:tab title="Längengrad des Fundortes (W/O xxx° xx' xx&quot;)">
-
-				<h:form>
+				<!-- TAB 2: Längengrad -->
+				<p:tab title="Längengrad des Fundortes (W/O xxx° xx' xx&quot;)">
 					<h:panelGrid columns="8" cellpadding="8" style="vertical-align:top">
 
-						<!-- Radionbuttons Längenzone -->
 						<h:panelGroup>
-							<p:selectOneRadio id="page" value="#{radioView.page}"
-								layout="grid" columns="2">
-								<f:selectItem itemLabel="West" itemValue="Option1" />
-								<f:selectItem itemLabel="Ost" itemValue="Option2" />
+							<p:selectOneRadio id="longitude_zone"
+								value="#{netzController.netz.eastWest}" layout="grid"
+								columns="2">
+								<f:selectItem itemLabel="West" itemValue="West" />
+								<f:selectItem itemLabel="Ost" itemValue="East" />
 							</p:selectOneRadio>
 							<h:outputText value="Längenzone"
-								style="font-size:small; color:gray; margin-top:4px; display:block; text-align:center;" />
+								style="font-size:small; color:gray; text-align:center;" />
 						</h:panelGroup>
 
-						<!-- Slider Längengrad Grad -->
 						<h:panelGroup>
-							<p:inputText id="long_degree" value="#{sliderView.number4}"
+							<p:inputText id="long_degree"
+								value="#{netzController.netz.longituteDegree}"
 								style="width:80px" />
 							<p:slider for="long_degree" minValue="0" maxValue="180"
-								style="width:80px; margin-top:4px;" />
+								style="width:80px;" />
 							<h:outputText value="° (Grad)"
-								style="font-size:small; color:gray; margin-top:4px;" />
+								style="font-size:small; color:gray;" />
 						</h:panelGroup>
 
-						<!-- Slider Längengrad Minuten -->
 						<h:panelGroup>
-							<p:inputText id="long_minute" value="#{sliderView.number5}"
+							<p:inputText id="long_minute"
+								value="#{netzController.netz.longituteMinute}"
 								style="width:80px" />
 							<p:slider for="long_minute" minValue="0" maxValue="59"
-								style="width:80px; margin-top:4px;" />
+								style="width:80px;" />
 							<h:outputText value="' (Minuten)"
-								style="font-size:small; color:gray; margin-top:4px;" />
+								style="font-size:small; color:gray;" />
 						</h:panelGroup>
 
-						<!-- Slider Längengrad Sekunden -->
 						<h:panelGroup>
-							<p:inputText id="long_seconds" value="#{sliderView.number6}"
+							<p:inputText id="long_seconds"
+								value="#{netzController.netz.longituteSeconds}"
 								style="width:80px" />
 							<p:slider for="long_seconds" minValue="0" maxValue="59"
-								style="width:80px; margin-top:4px;" />
+								style="width:80px;" />
 							<h:outputText value="″ (Sekunden)"
-								style="font-size:small; color:gray; margin-top:4px;" />
+								style="font-size:small; color:gray;" />
 						</h:panelGroup>
 
 					</h:panelGrid>
-				</h:form>
+				</p:tab>
 
-			</p:tab>
-			<p:tab title="Größe des Netzes und Sichtungsdatum">
-				<h:form>
+				<!-- TAB 3: Netzgröße & Datum -->
+				<p:tab title="Größe des Netzes und Sichtungsdatum">
 					<h:panelGrid columns="4" cellpadding="8" style="vertical-align:top">
 
 						<!-- Slider Netzgröße -->
 						<h:panelGroup>
-							<p:inputText id="net_size" value="#{sliderView.number7}"
+							<p:inputText id="net_size"
+								value="#{netzController.netz.netSize}"
 								style="width:200px; margin-top:1px;" />
 							<p:slider for="net_size" minValue="1" maxValue="50000"
 								style="width:200px; margin-top:4px;" />
@@ -146,38 +147,38 @@
 						<!-- Kalender -->
 						<h:panelGroup>
 							<h:outputScript name="locales/locale-de.js" library="primefaces" />
-							<p:datePicker id="german" value="#{actionController.dateDe}"
+							<p:datePicker id="german" value="#{netzController.netz.dateDe}"
 								locale="de" monthNavigator="true" pattern="dd.MM.yyyy"
 								showIcon="true" style="margin-top:-11px;"
-								maxDate="#{actionController.today}" />
+								maxDate="#{netzController.netz.today}" />
 
-							<h:outputText value="Sichtungsdatum: #{actionController.today}"
+							<h:outputText value="Sichtungsdatum: #{netzController.netz.today}"
 								style="font-size:small; color:gray; margin-top:4px; display:block;" />
 
 
 						</h:panelGroup>
 					</h:panelGrid>
-				</h:form>
-			</p:tab>
-		</p:accordionPanel>
+				</p:tab>
 
-		<h:form>
+			</p:accordionPanel>
+
+			<!-- Toggle + Buttons -->
 			<h:panelGrid style="margin-top:22px">
 				<h5>Geisternetz anonym melden?</h5>
-				<p:toggleSwitch value="1" style="margin-top:-22px" />
+				<p:toggleSwitch value="1" />
 			</h:panelGrid>
 
 			<p:commandButton value="Bestätigen" icon="pi pi-check-circle"
+				action="#{netzController.setNetz}" ajax="false"
 				style="margin-top:22px" />
 
+			<!--immediate="true" um Validierung zu umgehen  -->
 			<p:commandButton value="Abbrechen" icon="pi pi-times-circle"
-				styleClass="ui-button-secondary"
-				style="margin-top:22px; margin-left:10px"
-				action="#{actionController.index}" ajax="false" />
-				
-		
-		</h:form>
+				styleClass="ui-button-secondary" action="#{actionController.index}"
+				ajax="false" immediate="true"
+				style="margin-top:22px; margin-left:10px" />
 
+		</h:form>
 	</p:card>
 </h:body>
 </html>
