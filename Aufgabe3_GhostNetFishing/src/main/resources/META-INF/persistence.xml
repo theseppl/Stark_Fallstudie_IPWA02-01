@@ -9,7 +9,7 @@
         <class>ghostNetFishing.Netz</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/todo-db"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/NetDB"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="hibernate.show_sql" value="true"/>
