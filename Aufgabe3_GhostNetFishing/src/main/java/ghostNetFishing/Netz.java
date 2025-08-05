@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 public class Netz {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int ID;
+	private Long ID;
 	
 	private String northSouth;
     private int latituteDegree;
