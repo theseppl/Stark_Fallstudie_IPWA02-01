@@ -1,7 +1,6 @@
 package ghostNetFishing;
 
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.*;
 

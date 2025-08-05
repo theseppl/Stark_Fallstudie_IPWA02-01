@@ -46,12 +46,12 @@ public class Netz {
 		this.today = today;
 	}
 
-	public int getID() {
+	public Long getID() {
 		return ID;
 	}
 
 	public void setID(int iD) {
-		ID = iD;
+		ID = (long) iD;
 	}
 
 	public int getLatituteDegree() {
