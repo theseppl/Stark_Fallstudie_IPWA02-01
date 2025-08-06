@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 public class NetzController {
 
     private Netz netz = new Netz(); // wird z. B. über ein Formular gefüllt
+    private boolean anonym;
 
     public Netz getNetz() {
         return netz;
@@ -33,7 +34,19 @@ public class NetzController {
             emf.close();
         }
 
-        return "index"; // z. B. zur Übersicht der Netze
+        if (anonym) {
+            return "index"; // Zurück zur Übersicht
+        } else {
+            return "impressum"; // Weiter zur nächsten Seite
+        } // z. B. zur Übersicht der Netze
+    }
+    
+    public boolean isAnonym() {
+        return anonym;
+    }
+
+    public void setAnonym(boolean anonym) {
+        this.anonym = anonym;
     }
 }
 
