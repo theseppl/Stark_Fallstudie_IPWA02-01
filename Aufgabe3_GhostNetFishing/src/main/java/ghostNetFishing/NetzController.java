@@ -37,7 +37,7 @@ public class NetzController {
         if (anonym) {
             return "index"; // Zurück zur Übersicht
         } else {
-            return "impressum"; // Weiter zur nächsten Seite
+            return "person"; // Weiter zur nächsten Seite
         } // z. B. zur Übersicht der Netze
     }
     
