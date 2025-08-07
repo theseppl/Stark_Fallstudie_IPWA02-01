@@ -4,9 +4,9 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.*;
 
-@Named("netzController")
+@Named("netzDAO")
 @RequestScoped
-public class NetzController {
+public class NetzDAO {
 
     private Netz netz = new Netz(); // wird z. B. über ein Formular gefüllt
     private boolean anonym;

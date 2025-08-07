@@ -29,6 +29,7 @@ public class Netz {
     
     public Netz() {}
     
+    /*
 	public Netz(int latituteDegree, int latituteMinute, int latituteSeconds, int longituteDegree,
 			int longituteMinute, int longituteSeconds, int netSize, String northSouth,
 			String eastWest, LocalDate dateDe, LocalDate today) {
@@ -45,6 +46,7 @@ public class Netz {
 		this.dateDe = dateDe;
 		this.today = today;
 	}
+	*/
 
 	public Long getID() {
 		return ID;
