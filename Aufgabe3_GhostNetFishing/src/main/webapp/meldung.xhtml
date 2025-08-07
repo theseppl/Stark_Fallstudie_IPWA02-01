@@ -39,8 +39,8 @@
 
 						<h:panelGroup>
 							<p:selectOneRadio id="latitude_zone" required="true"
-								value="#{netzDAO.netz.northSouth}"
-								layout="pageDirection" columns="2">
+								value="#{netzDAO.netz.northSouth}" layout="pageDirection"
+								columns="2">
 								<f:selectItem itemLabel="Nord" itemValue="North" />
 								<f:selectItem itemLabel="Süd" itemValue="South" />
 							</p:selectOneRadio>
@@ -50,8 +50,7 @@
 
 						<h:panelGroup>
 							<p:inputText id="lat_degree"
-								value="#{netzDAO.netz.latituteDegree}"
-								style="width:80px" />
+								value="#{netzDAO.netz.latituteDegree}" style="width:80px" />
 							<p:slider for="lat_degree" minValue="0" maxValue="90"
 								style="width:80px;" />
 							<h:outputText value="° (Grad)"
@@ -60,8 +59,7 @@
 
 						<h:panelGroup>
 							<p:inputText id="lat_minute"
-								value="#{netzDAO.netz.latituteMinute}"
-								style="width:80px" />
+								value="#{netzDAO.netz.latituteMinute}" style="width:80px" />
 							<p:slider for="lat_minute" minValue="0" maxValue="59"
 								style="width:80px;" />
 							<h:outputText value="' (Minuten)"
@@ -69,8 +67,7 @@
 						</h:panelGroup>
 
 						<h:panelGroup>
-							<p:inputText id="lat_seconds"
-								value="#{net.latituteSeconds}"
+							<p:inputText id="lat_seconds" value="#{net.latituteSeconds}"
 								style="width:80px" />
 							<p:slider for="lat_seconds" minValue="0" maxValue="59"
 								style="width:80px;" />
@@ -87,8 +84,7 @@
 
 						<h:panelGroup>
 							<p:selectOneRadio id="longitude_zone" required="true"
-								value="#{netzDAO.netz.eastWest}" layout="grid"
-								columns="2">
+								value="#{netzDAO.netz.eastWest}" layout="grid" columns="2">
 								<f:selectItem itemLabel="West" itemValue="West" />
 								<f:selectItem itemLabel="Ost" itemValue="East" />
 							</p:selectOneRadio>
@@ -98,8 +94,7 @@
 
 						<h:panelGroup>
 							<p:inputText id="long_degree"
-								value="#{netzDAO.netz.longituteDegree}"
-								style="width:80px" />
+								value="#{netzDAO.netz.longituteDegree}" style="width:80px" />
 							<p:slider for="long_degree" minValue="0" maxValue="180"
 								style="width:80px;" />
 							<h:outputText value="° (Grad)"
@@ -108,8 +103,7 @@
 
 						<h:panelGroup>
 							<p:inputText id="long_minute"
-								value="#{netzDAO.netz.longituteMinute}"
-								style="width:80px" />
+								value="#{netzDAO.netz.longituteMinute}" style="width:80px" />
 							<p:slider for="long_minute" minValue="0" maxValue="59"
 								style="width:80px;" />
 							<h:outputText value="' (Minuten)"
@@ -118,8 +112,7 @@
 
 						<h:panelGroup>
 							<p:inputText id="long_seconds"
-								value="#{netzDAO.netz.longituteSeconds}"
-								style="width:80px" />
+								value="#{netzDAO.netz.longituteSeconds}" style="width:80px" />
 							<p:slider for="long_seconds" minValue="0" maxValue="59"
 								style="width:80px;" />
 							<h:outputText value="″ (Sekunden)"
@@ -135,8 +128,7 @@
 
 						<!-- Slider Netzgröße -->
 						<h:panelGroup>
-							<p:inputText id="net_size"
-								value="#{netzDAO.netz.netSize}"
+							<p:inputText id="net_size" value="#{netzDAO.netz.netSize}"
 								style="width:200px; margin-top:1px;" />
 							<p:slider for="net_size" minValue="1" maxValue="50000"
 								style="width:200px; margin-top:4px;" />
@@ -147,14 +139,13 @@
 						<!-- Kalender -->
 						<h:panelGroup>
 							<h:outputScript name="locales/locale-de.js" library="primefaces" />
-							<p:datePicker id="german" value="#{netzDAO.netz.dateDe}" required="true"
-								locale="de" monthNavigator="true" pattern="dd.MM.yyyy"
-								showIcon="true" style="margin-top:-11px;"
+							<p:datePicker id="german" value="#{netzDAO.netz.dateDe}"
+								required="true" locale="de" monthNavigator="true"
+								pattern="dd.MM.yyyy" showIcon="true" style="margin-top:-11px;"
 								maxDate="#{netzDAO.netz.today}" />
 
 							<h:outputText value="Sichtungsdatum: #{netzDAO.netz.today}"
 								style="font-size:small; color:gray; margin-top:4px; display:block;" />
-
 
 						</h:panelGroup>
 					</h:panelGrid>
@@ -169,8 +160,7 @@
 			</h:panelGrid>
 
 			<p:commandButton value="Bestätigen" icon="pi pi-check-circle"
-				action="#{netzDAO.setNetz}" ajax="false"
-				style="margin-top:22px" />
+				action="#{netzDAO.setNetz}" ajax="false" style="margin-top:22px" />
 
 			<!--immediate="true" um Validierung zu umgehen  -->
 			<p:commandButton value="Abbrechen" icon="pi pi-times-circle"

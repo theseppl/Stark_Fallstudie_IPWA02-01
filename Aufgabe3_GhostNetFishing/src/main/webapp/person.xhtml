@@ -31,43 +31,9 @@
 			<!-- Starrer Container mit fixem Abstand -->
 			<div style="display: flex; justify-content: flex-start; gap: 0;">
 
- 
+
 				<!-- Erste Card mit rechtem Abstand -->
-			<!-- 	<p:card style="width: 30em; margin-right: 50px;">
-					<f:facet name="title">Bereits registriert? Bitte hier anmelden.</f:facet>
 
-					<h:panelGroup layout="block" style="width: 350px; margin: 0 auto;">
-						<div style="display: flex; flex-direction: column; gap: 20px;">
-							<div
-								style="display: flex; justify-content: space-between; align-items: center;">
-								<p:outputLabel value="Benutzername:" for="name" />
-								<p:inputText id="name" value="#{loginController.benutzer.name}"
-									size="25" style="width: 200px;">
-									<f:event type="jakarta.faces.event.PostValidateEvent"
-										listener="#{loginController.postValidateName}" />
-								</p:inputText>
-							</div>
-
-							<div
-								style="display: flex; justify-content: space-between; align-items: center;">
-								<p:outputLabel value="Passwort:" for="pass" />
-								<p:password id="pass"
-									value="#{loginController.benutzer.passwort}" required="true"
-									validator="#{loginController.validateLogin}" size="25"
-									style="width: 200px;" />
-							</div>
-						</div>
-					</h:panelGroup>
-
-					<f:facet name="footer">
-						<p:commandButton value="Anmelden" action="#{loginController.login}"  style="margin-top: 57px;"/>
-						<p:messages>
-							<p:autoUpdate />
-						</p:messages>
-					</f:facet>
-				</p:card>
-
--->
 
 				<!-- Zweite Card ohne Abstand -->
 				<p:card style="width: 30em;">
@@ -77,47 +43,45 @@
 						<div style="display: flex; flex-direction: column; gap: 20px;">
 							<div
 								style="display: flex; justify-content: space-between; align-items: center;">
-								<p:outputLabel value="Vorname:" for="name" />
+								<p:outputLabel value="Vorname:" for="firstName" />
 								<p:inputText id="firstName"
-									value="#{loginController.benutzer.name}" size="25"
+									value="#{personDAO.person.firstName}" size="25"
 									style="width: 200px;">
 								</p:inputText>
 							</div>
 							<div
 								style="display: flex; justify-content: space-between; align-items: center;">
-								<p:outputLabel value="Nachname:" for="name" />
-								<p:inputText id="lastName"
-									value="#{loginController.benutzer.name}" size="25"
-									style="width: 200px;">
+								<p:outputLabel value="Nachname:" for="lastName" />
+								<p:inputText id="lastName" value="#{personDAO.person.lastName}"
+									size="25" style="width: 200px;">
 								</p:inputText>
 							</div>
 							<div
 								style="display: flex; justify-content: space-between; align-items: center;">
-								<p:outputLabel value="Telefon:" for="name" />
-								<p:inputText id="phone"
-									value="#{loginController.benutzer.name}" size="25"
+								<p:outputLabel value="Telefon:" for="phoneNumber" />
+								<p:inputText id="phoneNumber"
+									value="#{personDAO.person.phoneNumber}" size="25"
 									style="width: 200px;">
 								</p:inputText>
 							</div>
-
-
 
 						</div>
 					</h:panelGroup>
 
 					<f:facet name="footer">
-						<p:commandButton value="Registrieren" action="#{actionController.impressum}" />
+						<p:commandButton value="Registrieren"
+							action="#{personDAO.setPerson}" />
+
 						<p:messages>
 							<p:autoUpdate />
 						</p:messages>
+
 					</f:facet>
 				</p:card>
 
 			</div>
 		</h:form>
 	</p:card>
-
-
 
 </h:body>
 </html>
