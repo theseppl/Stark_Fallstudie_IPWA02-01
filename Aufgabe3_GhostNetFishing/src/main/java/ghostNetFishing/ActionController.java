@@ -21,4 +21,8 @@ public class ActionController implements Serializable {
 	public String notification() {
 		return "meldung";
 	}
+	
+	public String person() {
+		return "person";
+	}
 }
