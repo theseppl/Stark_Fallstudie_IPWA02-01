@@ -13,18 +13,18 @@ import jakarta.persistence.Persistence;
 public class NetzDAO {
 
     private Netz netz = new Netz();
-    private Person person = new Person(); // wird im selben Formular ausgefüllt
+ //   private Person person = new Person(); // wird im selben Formular ausgefüllt
     private boolean anonym;
-//    @Inject
-//    private PersonDAO personDAO;
+    @Inject
+    private PersonDAO personDAO;
 
     public Netz getNetz() {
         return netz;
     }
 
-    public Person getPerson() {
-        return person;
-    }
+//    public Person getPerson() {
+//        return person;
+//    }
     
 
     public boolean isAnonym() {
@@ -39,9 +39,9 @@ public class NetzDAO {
 		this.netz = netz;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
-	}
+//	public void setPerson(Person person) {
+//		this.person = person;
+//	}
 
 	public String setNetz() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
@@ -52,9 +52,10 @@ public class NetzDAO {
             tx.begin();
 
             if (!anonym) {
-            	em.persist(person); // delegiert an PersonDAO
-                netz.setMeldendePerson(person);
-                person.getGemeldeteNetze().add(netz); 
+            	Person melder = personDAO.getPerson();
+            	em.persist(melder); // delegiert an PersonDAO
+                netz.setMeldendePerson(melder);
+                melder.getGemeldeteNetze().add(netz); 
             } else {
                 netz.setMeldendePerson(null);
             }
