@@ -1,5 +1,8 @@
 package ghostNetFishing;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.inject.Named;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
@@ -11,9 +14,12 @@ public class Person {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long ID;
 	
-	String lastName;
-	String firstName;
-	String phoneNumber;
+	private String lastName;
+	private String firstName;
+	private String phoneNumber;
+
+	@OneToMany(mappedBy = "meldendePerson", cascade = CascadeType.ALL)
+	private List<Netz> gemeldeteNetze = new ArrayList<>();
 	
 	public Person() {}
 	
@@ -41,4 +47,13 @@ public class Person {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+	public List<Netz> getGemeldeteNetze() {
+		return gemeldeteNetze;
+	}
+
+	public void setGemeldeteNetze(List<Netz> gemeldeteNetze) {
+		this.gemeldeteNetze = gemeldeteNetze;
+	}
+	
 }

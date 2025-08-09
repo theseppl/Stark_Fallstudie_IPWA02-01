@@ -1,6 +1,7 @@
 package ghostNetFishing;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -11,45 +12,64 @@ import jakarta.persistence.Persistence;
 @RequestScoped
 public class NetzDAO {
 
-    private Netz netz = new Netz(); // wird z. B. über ein Formular gefüllt
+    private Netz netz = new Netz();
+    private Person person = new Person(); // wird im selben Formular ausgefüllt
     private boolean anonym;
+//    @Inject
+//    private PersonDAO personDAO;
 
     public Netz getNetz() {
         return netz;
     }
 
-    public String setNetz() {
-  //      this.netz = netz;
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction t = em.getTransaction();
-
-        try {
-            t.begin();
-            em.persist(netz); // oder em.merge(netz), falls es schon gespeichert ist
-            t.commit();
-        } catch (Exception e) {
-            if (t.isActive()) t.rollback();
-            e.printStackTrace(); // oder logger.error(...)
-        } finally {
-            em.close();
-            emf.close();
-        }
-
-        if (anonym) {
-            return "index"; // Zurück zur Übersicht
-        } else {
-            return "person"; // Weiter zur nächsten Seite
-        } // z. B. zur Übersicht der Netze
+    public Person getPerson() {
+        return person;
     }
     
-    public boolean isAnonym() {
-        return anonym;
-    }
 
-    public void setAnonym(boolean anonym) {
-        this.anonym = anonym;
+    public boolean isAnonym() {
+		return anonym;
+	}
+
+	public void setAnonym(boolean anonym) {
+		this.anonym = anonym;
+	}
+
+	public void setNetz(Netz netz) {
+		this.netz = netz;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public String setNetz() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+
+            if (!anonym) {
+            	em.persist(person); // delegiert an PersonDAO
+                netz.setMeldendePerson(person);
+                person.getGemeldeteNetze().add(netz); 
+            } else {
+                netz.setMeldendePerson(null);
+            }
+
+            em.persist(netz);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+
+        return "index.xhtml"; // oder "index.xhtml"
     }
 }
+
 

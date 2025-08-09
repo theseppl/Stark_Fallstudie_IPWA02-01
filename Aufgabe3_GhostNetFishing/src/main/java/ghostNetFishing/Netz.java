@@ -27,6 +27,10 @@ public class Netz {
     private LocalDate today = LocalDate.now();
     private String status = "gemeldet";
     
+    @ManyToOne
+    @JoinColumn(name = "meldende_person_id")
+    private Person meldendePerson;
+    
     public Netz() {}
     
     /*
@@ -151,6 +155,16 @@ public class Netz {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public Person getMeldendePerson() {
+		return meldendePerson;
+	}
+
+	public void setMeldendePerson(Person meldendePerson) {
+		this.meldendePerson = meldendePerson;
+	}
+	
+	
 
 
 }

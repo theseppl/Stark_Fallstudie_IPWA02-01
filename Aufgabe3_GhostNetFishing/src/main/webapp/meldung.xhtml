@@ -156,8 +156,42 @@
 			<!-- Toggle + Buttons -->
 			<h:panelGrid style="margin-top:22px">
 				<h5>Geisternetz anonym melden?</h5>
-				<p:toggleSwitch value="#{netzDAO.anonym}" />
+				<p:toggleSwitch value="#{netzDAO.anonym}">
+					<p:ajax update="personPanel" />
+				</p:toggleSwitch>
 			</h:panelGrid>
+
+			<!-- Personendaten nur anzeigen, wenn nicht anonym -->
+			<p:outputPanel id="personPanel" layout="block">
+				<p:card style="width: 30em;" rendered="#{!netzDAO.anonym}">
+					<f:facet name="title">Bitte Informationen zu Ihrer Person eingeben.</f:facet>
+
+					<h:panelGroup layout="block" style="width: 350px; margin: 0 auto;">
+						<div style="display: flex; flex-direction: column; gap: 20px;">
+							<div
+								style="display: flex; justify-content: space-between; align-items: center;">
+								<p:outputLabel value="Vorname:" for="firstName" />
+								<p:inputText id="firstName"
+									value="#{personDAO.person.firstName}" required="#{!netzDAO.anonym}" size="25"
+									style="width: 200px;" />
+							</div>
+							<div
+								style="display: flex; justify-content: space-between; align-items: center;">
+								<p:outputLabel value="Nachname:" for="lastName" />
+								<p:inputText id="lastName" value="#{personDAO.person.lastName}" required="#{!netzDAO.anonym}"
+									size="25" style="width: 200px;" />
+							</div>
+							<div
+								style="display: flex; justify-content: space-between; align-items: center;">
+								<p:outputLabel value="Telefon:" for="phoneNumber" />
+								<p:inputText id="phoneNumber"
+									value="#{personDAO.person.phoneNumber}" required="#{!netzDAO.anonym}" size="25"
+									style="width: 200px;" />
+							</div>
+						</div>
+					</h:panelGroup>
+				</p:card>
+			</p:outputPanel>
 
 			<p:commandButton value="Bestätigen" icon="pi pi-check-circle"
 				action="#{netzDAO.setNetz}" ajax="false" style="margin-top:22px" />
