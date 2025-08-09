@@ -28,29 +28,10 @@ public class Netz {
     private String status = "gemeldet";
     
     @ManyToOne
-    @JoinColumn(name = "meldende_person_id")
-    private Person meldendePerson;
+    @JoinColumn(name = "reportingPerson_ID")
+    private Person reportingPerson;
     
     public Netz() {}
-    
-    /*
-	public Netz(int latituteDegree, int latituteMinute, int latituteSeconds, int longituteDegree,
-			int longituteMinute, int longituteSeconds, int netSize, String northSouth,
-			String eastWest, LocalDate dateDe, LocalDate today) {
-		super();
-		this.latituteDegree = latituteDegree;
-		this.latituteMinute = latituteMinute;
-		this.latituteSeconds = latituteSeconds;
-		this.longituteDegree = longituteDegree;
-		this.longituteMinute = longituteMinute;
-		this.longituteSeconds = longituteSeconds;
-		this.netSize = netSize;
-		this.northSouth = northSouth;
-		this.eastWest = eastWest;
-		this.dateDe = dateDe;
-		this.today = today;
-	}
-	*/
 
 	public Long getID() {
 		return ID;
@@ -156,12 +137,12 @@ public class Netz {
 		this.status = status;
 	}
 
-	public Person getMeldendePerson() {
-		return meldendePerson;
+	public Person getReportingPerson() {
+		return reportingPerson;
 	}
 
-	public void setMeldendePerson(Person meldendePerson) {
-		this.meldendePerson = meldendePerson;
+	public void setReportingPerson(Person reportingPerson) {
+		this.reportingPerson = reportingPerson;
 	}
 	
 	

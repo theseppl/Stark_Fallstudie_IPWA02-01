@@ -18,8 +18,8 @@ public class Person {
 	private String firstName;
 	private String phoneNumber;
 
-	@OneToMany(mappedBy = "meldendePerson", cascade = CascadeType.ALL)
-	private List<Netz> gemeldeteNetze = new ArrayList<>();
+	@OneToMany(mappedBy = "reportingPerson", cascade = CascadeType.ALL)
+	private List<Netz> reportedNets = new ArrayList<>();
 	
 	public Person() {}
 	
@@ -48,12 +48,12 @@ public class Person {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<Netz> getGemeldeteNetze() {
-		return gemeldeteNetze;
+	public List<Netz> getReportedNets() {
+		return reportedNets;
 	}
 
-	public void setGemeldeteNetze(List<Netz> gemeldeteNetze) {
-		this.gemeldeteNetze = gemeldeteNetze;
+	public void setReportedNets(List<Netz> reportedNets) {
+		this.reportedNets = reportedNets;
 	}
 	
 }

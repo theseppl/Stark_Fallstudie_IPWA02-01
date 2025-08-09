@@ -12,21 +12,15 @@ import jakarta.persistence.Persistence;
 @RequestScoped
 public class NetzDAO {
 
-    private Netz netz = new Netz();
- //   private Person person = new Person(); // wird im selben Formular ausgefüllt
-    private boolean anonym;
     @Inject
     private PersonDAO personDAO;
+    private Netz net = new Netz();
+    private boolean anonym;
 
-    public Netz getNetz() {
-        return netz;
+    public Netz getNet() {
+        return net;
     }
-
-//    public Person getPerson() {
-//        return person;
-//    }
     
-
     public boolean isAnonym() {
 		return anonym;
 	}
@@ -35,15 +29,11 @@ public class NetzDAO {
 		this.anonym = anonym;
 	}
 
-	public void setNetz(Netz netz) {
-		this.netz = netz;
+	public void setNet(Netz net) {
+		this.net = net;
 	}
 
-//	public void setPerson(Person person) {
-//		this.person = person;
-//	}
-
-	public String setNetz() {
+	public String saveNet() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -52,15 +42,15 @@ public class NetzDAO {
             tx.begin();
 
             if (!anonym) {
-            	Person melder = personDAO.getPerson();
-            	em.persist(melder); // delegiert an PersonDAO
-                netz.setMeldendePerson(melder);
-                melder.getGemeldeteNetze().add(netz); 
+            	Person reportingPerson = personDAO.getPerson();
+            	em.persist(reportingPerson);
+                net.setReportingPerson(reportingPerson);
+                reportingPerson.getReportedNets().add(net); 
             } else {
-                netz.setMeldendePerson(null);
+                net.setReportingPerson(null);
             }
 
-            em.persist(netz);
+            em.persist(net);
             tx.commit();
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
@@ -69,7 +59,7 @@ public class NetzDAO {
             em.close();
         }
 
-        return "index.xhtml"; // oder "index.xhtml"
+        return "index.xhtml";
     }
 }
 
