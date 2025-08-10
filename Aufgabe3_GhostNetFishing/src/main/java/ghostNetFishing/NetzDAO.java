@@ -1,5 +1,6 @@
 package ghostNetFishing;
 
+import java.io.ObjectOutputStream.PutField;
 import java.util.List;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -105,10 +106,15 @@ public class NetzDAO {
             em.close();
             emf.close();
         }
-        FacesContext.getCurrentInstance()
-        .getExternalContext()
-        .getFlash()
-        .put("newPersonId", newPersonId);
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("newPersonId", newPersonId);
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latDegree", net.getLatituteDegree());
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latMinute", net.getLatituteMinute());
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latSeconds", net.getLatituteSeconds());
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longDegree", net.getLongituteDegree());
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longMinute", net.getLongituteMinute());
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longSeconds", net.getLongituteSeconds());
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("netSize", net.getNetSize());
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("sightingDate", net.getDateDe());
 
         return "uebersichtMeldung.xhtml?faces-redirect=true";
     }

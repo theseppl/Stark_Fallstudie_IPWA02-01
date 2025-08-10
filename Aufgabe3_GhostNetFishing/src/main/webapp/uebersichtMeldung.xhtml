@@ -30,7 +30,17 @@
 	<p:card style="width: 90%; padding: 50px;">
 		<h:form>
 			<h:outputText value="Ihre ID lautet: #{flash.newPersonId}" />
-			<br/>
+			<br />
+			<h:outputText
+				value="Breitengrad: #{flash.latDegree}° #{flash.latMinute}' #{flash.latSeconds}″" />
+			<br />
+			<h:outputText
+				value="Längengrad: #{flash.longDegree}° #{flash.longMinute}' #{flash.longSeconds}″" />
+			<br />
+			<h:outputText value="Netzgröße: #{flash.netSize} m²" />
+			<br />
+			<h:outputText value="Sichtungsdatum: #{flash.sightingDate}" />
+			<br />
 			<p:commandButton value="Zur Startseite"
 				action="index.xhtml?faces-redirect=true" />
 		</h:form>
