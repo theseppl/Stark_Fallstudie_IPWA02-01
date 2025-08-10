@@ -11,6 +11,15 @@ import jakarta.persistence.Persistence;
 @RequestScoped
 public class PersonDAO {
 	private Person person = new Person(); // wird z. B. über ein Formular gefüllt
+	private String personId; //zur Prüfung ob ID bereits vorhanden
+	
+	public String getPersonId() {
+	    return personId;
+	}
+
+	public void setPersonId(String personId) {
+	    this.personId = personId;
+	}
 
     public Person getPerson() {
         return person;

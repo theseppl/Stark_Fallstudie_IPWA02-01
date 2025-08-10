@@ -67,8 +67,8 @@
 						</h:panelGroup>
 
 						<h:panelGroup>
-							<p:inputText id="lat_seconds" value="#{netzDAO.net.latituteSeconds}"
-								style="width:80px" />
+							<p:inputText id="lat_seconds"
+								value="#{netzDAO.net.latituteSeconds}" style="width:80px" />
 							<p:slider for="lat_seconds" minValue="0" maxValue="59"
 								style="width:80px;" />
 							<h:outputText value="″ (Sekunden)"
@@ -170,24 +170,36 @@
 						<div style="display: flex; flex-direction: column; gap: 20px;">
 							<div
 								style="display: flex; justify-content: space-between; align-items: center;">
+								<p:outputLabel value="Personen-ID (optional):" for="personId" />
+								<p:inputText id="personId" value="#{personDAO.personId}"
+									size="25" style="width: 200px;" />
+							</div>
+							<div
+								style="display: flex; justify-content: space-between; align-items: center;">
 								<p:outputLabel value="Vorname:" for="firstName" />
 								<p:inputText id="firstName"
-									value="#{personDAO.person.firstName}" required="#{!netzDAO.anonym}" size="25"
-									style="width: 200px;" />
+									value="#{personDAO.person.firstName}"
+									size="25" style="width: 200px;" />
 							</div>
 							<div
 								style="display: flex; justify-content: space-between; align-items: center;">
 								<p:outputLabel value="Nachname:" for="lastName" />
-								<p:inputText id="lastName" value="#{personDAO.person.lastName}" required="#{!netzDAO.anonym}"
+								<p:inputText id="lastName" value="#{personDAO.person.lastName}"
 									size="25" style="width: 200px;" />
 							</div>
 							<div
 								style="display: flex; justify-content: space-between; align-items: center;">
 								<p:outputLabel value="Telefon:" for="phoneNumber" />
 								<p:inputText id="phoneNumber"
-									value="#{personDAO.person.phoneNumber}" required="#{!netzDAO.anonym}" size="25"
-									style="width: 200px;" />
+									value="#{personDAO.person.phoneNumber}"
+									size="25" style="width: 200px;" />
 							</div>
+
+							<!--Required für alle 4 Personenfelder identisch: style="display: flex; justify-content: space-between; align-items: center;">
+								<p:outputLabel value="Telefon:" for="phoneNumber" />
+								<p:inputText id="phoneNumber"
+									value="#{personDAO.person.phoneNumber}"
+									required="#{!netzDAO.anonym}" size="25" style="width: 200px;" />  -->
 						</div>
 					</h:panelGroup>
 				</p:card>
