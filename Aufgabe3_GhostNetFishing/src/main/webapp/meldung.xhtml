@@ -194,6 +194,8 @@
 									value="#{personDAO.person.phoneNumber}"
 									size="25" style="width: 200px;" />
 							</div>
+							<h:outputText value="Neue Personen-ID: #{netzDAO.neuePersonId}" rendered="#{netzDAO.neuePersonId != null}" />
+							
 
 							<!--Required für alle 4 Personenfelder identisch: style="display: flex; justify-content: space-between; align-items: center;">
 								<p:outputLabel value="Telefon:" for="phoneNumber" />

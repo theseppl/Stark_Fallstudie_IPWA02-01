@@ -20,6 +20,7 @@ public class NetzDAO {
     private PersonDAO personDAO;
     private Netz net = new Netz();
     private boolean anonym;
+    private Long newPersonId; // 🆕 ID der neu gespeicherten Person
 
     public Netz getNet() {
         return net;
@@ -35,6 +36,10 @@ public class NetzDAO {
 
     public void setNet(Netz net) {
         this.net = net;
+    }
+
+    public Long getNeuePersonId() {
+        return newPersonId;
     }
 
     private Person findExistingPerson(EntityManager em, Person person) {
@@ -58,7 +63,6 @@ public class NetzDAO {
             if (!anonym) {
                 Person person = personDAO.getPerson(); // vom Formular
 
-                // 🔍 Prüfen, ob eine Personen-ID eingegeben wurde
                 String personIdStr = personDAO.getPersonId();
                 if (personIdStr != null && !personIdStr.isBlank()) {
                     try {
@@ -77,20 +81,18 @@ public class NetzDAO {
                         return null;
                     }
                 } else {
-                    // 🔁 Kein ID → Name + Telefonnummer prüfen
                     Person existing = findExistingPerson(em, person);
                     if (existing != null) {
                         net.setReportingPerson(existing);
                     } else {
                         em.persist(person);
                         net.setReportingPerson(person);
-                        FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_INFO, "Ihre neue Personen-ID: " + person.getID(), null));
+                        newPersonId = person.getID(); // 🆕 ID speichern
                     }
                 }
             }
 
-            em.persist(net); // Netz speichern
+            em.persist(net);
             t.commit();
 
         } catch (Exception e) {
@@ -103,7 +105,12 @@ public class NetzDAO {
             em.close();
             emf.close();
         }
+        FacesContext.getCurrentInstance()
+        .getExternalContext()
+        .getFlash()
+        .put("newPersonId", newPersonId);
 
-        return "index"; // oder deine Zielseite
+        return "uebersichtMeldung.xhtml?faces-redirect=true";
     }
 }
+
