@@ -1,6 +1,10 @@
 package ghostNetFishing;
 
+import java.util.List;
+
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
@@ -32,35 +36,55 @@ public class NetzDAO {
 	public void setNet(Netz net) {
 		this.net = net;
 	}
+	
+	private Person findExistingPerson(EntityManager em, Person person) {
+	    String jpql = "SELECT p FROM Person p WHERE LOWER(TRIM(p.firstName)) = :firstName AND LOWER(TRIM(p.lastName)) = :lastName AND TRIM(p.phoneNumber) = :phone";
+	    List<Person> result = em.createQuery(jpql, Person.class)
+	        .setParameter("firstName", person.getFirstName().trim().toLowerCase())
+	        .setParameter("lastName", person.getLastName().trim().toLowerCase())
+	        .setParameter("phone", person.getPhoneNumber().trim())
+	        .getResultList();
+	    return result.isEmpty() ? null : result.get(0);
+	}
+
 
 	public String saveNet() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
+	    EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
+	    EntityManager em = emf.createEntityManager();
+	    EntityTransaction t = em.getTransaction();
 
-        try {
-            tx.begin();
+	    try {
+	        t.begin();
 
-            if (!anonym) {
-            	Person reportingPerson = personDAO.getPerson();
-            	em.persist(reportingPerson);
-                net.setReportingPerson(reportingPerson);
-                reportingPerson.getReportedNets().add(net); 
-            } else {
-                net.setReportingPerson(null);
-            }
+	        if (!anonym) {
+	            Person person = personDAO.getPerson(); // vom Formular
+	            Person existing = findExistingPerson(em, person);
 
-            em.persist(net);
-            tx.commit();
-        } catch (Exception e) {
-            if (tx.isActive()) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            em.close();
-        }
+	            if (existing != null) {
+	                net.setReportingPerson(existing); // vorhandene Person verwenden
+	            } else {
+	                em.persist(person); // neue Person speichern
+	                net.setReportingPerson(person);
+	            }
+	        }
 
-        return "index.xhtml";
-    }
+	        em.persist(net); // Netz speichern
+	        t.commit();
+
+	    } catch (Exception e) {
+	        if (t.isActive()) t.rollback();
+	        e.printStackTrace();
+	        FacesContext.getCurrentInstance().addMessage(null,
+	            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler beim Speichern!", null));
+	        return null;
+	    } finally {
+	        em.close();
+	        emf.close();
+	    }
+
+	    return "index"; // oder deine Zielseite
+	}
+
 }
 
 
