@@ -1,6 +1,5 @@
 package ghostNetFishing;
 
-import java.io.ObjectOutputStream.PutField;
 import java.util.List;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -52,6 +51,19 @@ public class NetzDAO {
             .getResultList();
         return result.isEmpty() ? null : result.get(0);
     }
+    
+    public boolean isPersonInputValid() {
+        String id = personDAO.getPersonId();
+        Person p = personDAO.getPerson();
+
+        boolean idInput = id != null && !id.trim().isEmpty();
+        boolean personalDatesInput = p != null &&
+            p.getFirstName() != null && !p.getFirstName().trim().isEmpty() &&
+            p.getLastName() != null && !p.getLastName().trim().isEmpty() &&
+            p.getPhoneNumber() != null && !p.getPhoneNumber().trim().isEmpty();
+
+        return idInput || personalDatesInput;
+    }
 
     public String saveNet() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
@@ -62,9 +74,17 @@ public class NetzDAO {
             t.begin();
 
             if (!anonym) {
-                Person person = personDAO.getPerson(); // vom Formular
+                // 🔒 Validierung: Entweder ID oder alle Felder müssen ausgefüllt sein
+                if (!isPersonInputValid()) {
+                    FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Bitte geben Sie entweder eine Personen-ID oder alle drei Felder (Vorname, Nachname, Telefon) ein.", null));
+                    return null;
+                }
 
+                Person person = personDAO.getPerson();
                 String personIdStr = personDAO.getPersonId();
+
                 if (personIdStr != null && !personIdStr.isBlank()) {
                     try {
                         Long personId = Long.parseLong(personIdStr);
@@ -73,14 +93,13 @@ public class NetzDAO {
                             net.setReportingPerson(existingById);
                             FacesContext.getCurrentInstance().getExternalContext().getFlash().put("existingPersonId", existingById.getID());
                         } else {
-                           // FacesContext.getCurrentInstance().addMessage(null,
-                           //     new FacesMessage(FacesMessage.SEVERITY_WARN, "Personen-ID nicht gefunden", null));
-                        //	FacesContext.getCurrentInstance().getExternalContext().getFlash().put("newPersonId", newPersonId);
+                            FacesContext.getCurrentInstance().addMessage(null,
+                                new FacesMessage(FacesMessage.SEVERITY_WARN, "Personen-ID nicht gefunden", null)); //bei falscher Nummer
                             return null;
                         }
                     } catch (NumberFormatException ex) {
                         FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ungültige Personen-ID", null));
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ungültige Personen-ID", null)); //z.B. bei Buchstaben
                         return null;
                     }
                 } else {
@@ -90,7 +109,7 @@ public class NetzDAO {
                     } else {
                         em.persist(person);
                         net.setReportingPerson(person);
-                        newPersonId = person.getID(); // 🆕 ID speichern
+                        newPersonId = person.getID();
                     }
                 }
             }
@@ -108,7 +127,8 @@ public class NetzDAO {
             em.close();
             emf.close();
         }
-     //   FacesContext.getCurrentInstance().getExternalContext().getFlash().put("personId", net.getReportingPerson().getID());
+
+        // Flash-Attribute für Weiterleitung
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("newPersonId", newPersonId);
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latDegree", net.getLatituteDegree());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latMinute", net.getLatituteMinute());
@@ -121,5 +141,6 @@ public class NetzDAO {
 
         return "uebersichtMeldung.xhtml?faces-redirect=true";
     }
+
 }
 

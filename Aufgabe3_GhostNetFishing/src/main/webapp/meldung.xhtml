@@ -14,9 +14,9 @@
 <h:body>
 
 	<!-- Menüleiste separat -->
-	<h:form>
-		<ui:include src="menubar.xhtml" />
-	</h:form>
+
+	<ui:include src="menubar.xhtml" />
+
 
 	<div class="card">
 		<h:panelGrid columns="2"
@@ -39,6 +39,7 @@
 
 						<h:panelGroup>
 							<p:selectOneRadio id="latitude_zone" required="true"
+								requiredMessage="Bitte geben Sie die Hemisphäre an!"
 								value="#{netzDAO.net.northSouth}" layout="pageDirection"
 								columns="2">
 								<f:selectItem itemLabel="Nord" itemValue="North" />
@@ -84,6 +85,7 @@
 
 						<h:panelGroup>
 							<p:selectOneRadio id="longitude_zone" required="true"
+								requiredMessage="Bitte geben Sie die Längenzone an!"
 								value="#{netzDAO.net.eastWest}" layout="grid" columns="2">
 								<f:selectItem itemLabel="West" itemValue="West" />
 								<f:selectItem itemLabel="Ost" itemValue="East" />
@@ -178,8 +180,8 @@
 								style="display: flex; justify-content: space-between; align-items: center;">
 								<p:outputLabel value="Vorname:" for="firstName" />
 								<p:inputText id="firstName"
-									value="#{personDAO.person.firstName}"
-									size="25" style="width: 200px;" />
+									value="#{personDAO.person.firstName}" size="25"
+									style="width: 200px;" />
 							</div>
 							<div
 								style="display: flex; justify-content: space-between; align-items: center;">
@@ -191,11 +193,12 @@
 								style="display: flex; justify-content: space-between; align-items: center;">
 								<p:outputLabel value="Telefon:" for="phoneNumber" />
 								<p:inputText id="phoneNumber"
-									value="#{personDAO.person.phoneNumber}"
-									size="25" style="width: 200px;" />
+									value="#{personDAO.person.phoneNumber}" size="25"
+									style="width: 200px;" />
 							</div>
-							<h:outputText value="Neue Personen-ID: #{netzDAO.neuePersonId}" rendered="#{netzDAO.neuePersonId != null}" />
-							
+							<h:outputText value="Neue Personen-ID: #{netzDAO.neuePersonId}"
+								rendered="#{netzDAO.neuePersonId != null}" />
+
 
 							<!--Required für alle 4 Personenfelder identisch: style="display: flex; justify-content: space-between; align-items: center;">
 								<p:outputLabel value="Telefon:" for="phoneNumber" />
@@ -206,9 +209,12 @@
 					</h:panelGroup>
 				</p:card>
 			</p:outputPanel>
+			<p:messages autoUpdate="true" showDetail="false" />
+
 
 			<p:commandButton value="Bestätigen" icon="pi pi-check-circle"
 				action="#{netzDAO.saveNet}" ajax="false" style="margin-top:22px" />
+
 
 			<!--immediate="true" um Validierung zu umgehen  -->
 			<p:commandButton value="Abbrechen" icon="pi pi-times-circle"
