@@ -71,9 +71,11 @@ public class NetzDAO {
                         Person existingById = em.find(Person.class, personId);
                         if (existingById != null) {
                             net.setReportingPerson(existingById);
+                            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("existingPersonId", existingById.getID());
                         } else {
-                            FacesContext.getCurrentInstance().addMessage(null,
-                                new FacesMessage(FacesMessage.SEVERITY_WARN, "Personen-ID nicht gefunden", null));
+                           // FacesContext.getCurrentInstance().addMessage(null,
+                           //     new FacesMessage(FacesMessage.SEVERITY_WARN, "Personen-ID nicht gefunden", null));
+                        //	FacesContext.getCurrentInstance().getExternalContext().getFlash().put("newPersonId", newPersonId);
                             return null;
                         }
                     } catch (NumberFormatException ex) {
@@ -106,6 +108,7 @@ public class NetzDAO {
             em.close();
             emf.close();
         }
+     //   FacesContext.getCurrentInstance().getExternalContext().getFlash().put("personId", net.getReportingPerson().getID());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("newPersonId", newPersonId);
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latDegree", net.getLatituteDegree());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latMinute", net.getLatituteMinute());

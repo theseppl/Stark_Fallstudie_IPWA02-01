@@ -29,7 +29,15 @@
 
 	<p:card style="width: 90%; padding: 50px;">
 		<h:form>
-			<h:outputText value="Ihre ID lautet: #{flash.newPersonId}" />
+			<h:panelGroup rendered="#{flash.newPersonId != null}">
+				<h:outputText
+					value="Ihre neue Personen-ID lautet: #{flash.newPersonId}" />
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{flash.existingPersonId != null}">
+				<h:outputText
+					value="Willkommen zurück! Ihre Personen-ID: #{flash.existingPersonId}" />
+			</h:panelGroup>
 			<br />
 			<h:outputText
 				value="Breitengrad: #{flash.latDegree}° #{flash.latMinute}' #{flash.latSeconds}″" />
