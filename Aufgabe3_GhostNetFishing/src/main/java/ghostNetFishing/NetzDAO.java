@@ -130,9 +130,11 @@ public class NetzDAO {
 
         // Flash-Attribute für Weiterleitung
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("newPersonId", newPersonId);
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("northSouth", net.getNorthSouth());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latDegree", net.getLatituteDegree());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latMinute", net.getLatituteMinute());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latSeconds", net.getLatituteSeconds());
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("eastWest", net.getEastWest());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longDegree", net.getLongituteDegree());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longMinute", net.getLongituteMinute());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longSeconds", net.getLongituteSeconds());
