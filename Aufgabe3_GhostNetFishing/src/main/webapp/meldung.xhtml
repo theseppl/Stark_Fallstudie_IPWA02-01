@@ -156,12 +156,15 @@
 			</p:accordionPanel>
 
 			<!-- Toggle + Buttons -->
-			<h:panelGrid style="margin-top:22px">
-				<h5>Geisternetz anonym melden?</h5>
-				<p:toggleSwitch value="#{netzDAO.anonym}">
+
+			<p:card style="width: 30em; margin: 20px 0">
+				<h4>Wollen Sie das Geisternetz anonym melden?</h4>
+				<p:selectBooleanButton value="#{netzDAO.anonym}" onLabel="Ja"
+					offLabel="Nein" onIcon="pi pi-check" offIcon="pi pi-times"
+					style="width:6rem">
 					<p:ajax update="personPanel" />
-				</p:toggleSwitch>
-			</h:panelGrid>
+				</p:selectBooleanButton>
+			</p:card>
 
 			<!-- Personendaten nur anzeigen, wenn nicht anonym -->
 			<p:outputPanel id="personPanel" layout="block">
@@ -170,12 +173,22 @@
 
 					<h:panelGroup layout="block" style="width: 350px; margin: 0 auto;">
 						<div style="display: flex; flex-direction: column; gap: 20px;">
+
+							<p:divider align="center">
+								<span class="ui-tag">Anmeldung über Ihre Personen-ID...</span>
+							</p:divider>
+
 							<div
 								style="display: flex; justify-content: space-between; align-items: center;">
 								<p:outputLabel value="Personen-ID (optional):" for="personId" />
 								<p:inputText id="personId" value="#{personDAO.personId}"
 									size="25" style="width: 200px;" />
 							</div>
+
+							<p:divider align="center">
+								<span class="ui-tag">...oder über Ihre persönliche Daten.</span>
+							</p:divider>
+
 							<div
 								style="display: flex; justify-content: space-between; align-items: center;">
 								<p:outputLabel value="Vorname:" for="firstName" />
@@ -226,3 +239,6 @@
 	</p:card>
 </h:body>
 </html>
+
+
+
