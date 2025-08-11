@@ -141,6 +141,5 @@ public class NetzDAO {
 
         return "uebersichtMeldung.xhtml?faces-redirect=true";
     }
-
 }
 

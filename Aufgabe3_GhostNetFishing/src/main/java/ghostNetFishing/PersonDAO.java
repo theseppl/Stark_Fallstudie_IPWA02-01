@@ -26,7 +26,6 @@ public class PersonDAO {
     }
 
     public String setPerson() {
-  //      this.person = person;
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();

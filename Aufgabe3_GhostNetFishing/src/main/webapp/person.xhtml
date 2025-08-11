@@ -28,14 +28,7 @@
 
 	<p:card style="width: 90%; padding: 50px;">
 		<h:form>
-			<!-- Starrer Container mit fixem Abstand -->
 			<div style="display: flex; justify-content: flex-start; gap: 0;">
-
-
-				<!-- Erste Card mit rechtem Abstand -->
-
-
-				<!-- Zweite Card ohne Abstand -->
 				<p:card style="width: 30em;">
 					<f:facet name="title">Bitte Informationen zu Ihrer Person eingeben.</f:facet>
 
@@ -64,20 +57,16 @@
 									style="width: 200px;">
 								</p:inputText>
 							</div>
-
 						</div>
 					</h:panelGroup>
 
 					<f:facet name="footer">
 						<p:commandButton value="Bestätigen"
 							action="#{personDAO.setPerson}" />
-
 					</f:facet>
 				</p:card>
-
 			</div>
 		</h:form>
 	</p:card>
-
 </h:body>
 </html>
