@@ -137,7 +137,7 @@ public class NetzDAO {
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longMinute", net.getLongituteMinute());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longSeconds", net.getLongituteSeconds());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("netSize", net.getNetSize());
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("sightingDate", net.getDateDe());
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("sightingDate", net.getNotificationDate ());
 
         return "uebersichtMeldung.xhtml?faces-redirect=true";
     }

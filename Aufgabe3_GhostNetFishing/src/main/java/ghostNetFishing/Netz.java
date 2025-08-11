@@ -1,6 +1,9 @@
 package ghostNetFishing;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 import jakarta.inject.Named;
 import jakarta.persistence.*;
 
@@ -23,8 +26,7 @@ public class Netz {
     private int longituteSeconds;
     
     private int netSize = 1;
-    private LocalDate dateDe;
-    private LocalDate today = LocalDate.now();
+    private LocalDate notificationDate = LocalDate.now();
     private String status = "gemeldet";
     
     @ManyToOne
@@ -113,20 +115,14 @@ public class Netz {
 		this.eastWest = eastWest;
 	}
 
-	public LocalDate getDateDe() {
-		return dateDe;
+	public String getNotificationDate () {
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy").withLocale(Locale.GERMAN);
+	    return notificationDate.format(formatter);
 	}
 
-	public void setDateDe(LocalDate dateDe) {
-		this.dateDe = dateDe;
-	}
 
-	public LocalDate getToday() {
-		return today;
-	}
-
-	public void setToday(LocalDate today) {
-		this.today = today;
+	public void setNotificationDate (LocalDate notificationDate) {
+		this.notificationDate = notificationDate;
 	}
 
 	public String getStatus() {
@@ -144,9 +140,6 @@ public class Netz {
 	public void setReportingPerson(Person reportingPerson) {
 		this.reportingPerson = reportingPerson;
 	}
-	
-	
-
 
 }
 

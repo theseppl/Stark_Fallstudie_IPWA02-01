@@ -14,9 +14,9 @@
 <h:body>
 
 	<!-- Menüleiste separat -->
-
-	<ui:include src="menubar.xhtml" />
-
+	<h:form>
+		<ui:include src="menubar.xhtml" />
+	</h:form>
 
 	<div class="card">
 		<h:panelGrid columns="2"
@@ -30,9 +30,7 @@
 	<p:card style="width: 90%; padding: 50px;">
 		<!-- Hauptformular -->
 		<h:form>
-
 			<p:accordionPanel widgetVar="basic" scrollIntoView="center">
-
 				<!-- TAB 1: Breitengrad -->
 				<p:tab title="Breitengrad des Fundortes (N/S xx° xx' xx&quot;)">
 					<h:panelGrid columns="8" cellpadding="8" style="vertical-align:top">
@@ -125,7 +123,7 @@
 				</p:tab>
 
 				<!-- TAB 3: Netzgröße & Datum -->
-				<p:tab title="Größe des Netzes und Sichtungsdatum">
+				<p:tab title="Größe des Netzes und Meldungsdatum">
 					<h:panelGrid columns="4" cellpadding="8" style="vertical-align:top">
 
 						<!-- Slider Netzgröße -->
@@ -137,26 +135,28 @@
 							<h:outputText value="m²"
 								style="font-size:small; color:gray; margin-top:4px;" />
 						</h:panelGroup>
+						<h:outputText value="Meldungsdatum: #{netzDAO.net.notificationDate }"
+								style="font-size:medium; color:gray; margin:4px; display:block;" />
 
-						<!-- Kalender -->
+						<!-- Kalender 
+						
 						<h:panelGroup>
 							<h:outputScript name="locales/locale-de.js" library="primefaces" />
-							<p:datePicker id="german" value="#{netzDAO.net.dateDe}"
+							<p:datePicker id="german" 
 								required="true" locale="de" monthNavigator="true"
 								pattern="dd.MM.yyyy" showIcon="true" style="margin-top:-11px;"
-								maxDate="#{netzDAO.net.today}" />
+								/>
 
 							<h:outputText value="Sichtungsdatum: #{netzDAO.net.today}"
 								style="font-size:small; color:gray; margin-top:4px; display:block;" />
-
 						</h:panelGroup>
+						-->
+						
 					</h:panelGrid>
 				</p:tab>
-
 			</p:accordionPanel>
 
 			<!-- Toggle + Buttons -->
-
 			<p:card style="width: 30em; margin: 20px 0">
 				<h4>Wollen Sie das Geisternetz anonym melden?</h4>
 				<p:selectBooleanButton value="#{netzDAO.anonym}" onLabel="Ja"
@@ -211,30 +211,20 @@
 							</div>
 							<h:outputText value="Neue Personen-ID: #{netzDAO.neuePersonId}"
 								rendered="#{netzDAO.neuePersonId != null}" />
-
-
-							<!--Required für alle 4 Personenfelder identisch: style="display: flex; justify-content: space-between; align-items: center;">
-								<p:outputLabel value="Telefon:" for="phoneNumber" />
-								<p:inputText id="phoneNumber"
-									value="#{personDAO.person.phoneNumber}"
-									required="#{!netzDAO.anonym}" size="25" style="width: 200px;" />  -->
 						</div>
 					</h:panelGroup>
 				</p:card>
 			</p:outputPanel>
 			<p:messages autoUpdate="true" showDetail="false" />
 
-
 			<p:commandButton value="Bestätigen" icon="pi pi-check-circle"
 				action="#{netzDAO.saveNet}" ajax="false" style="margin-top:22px" />
-
 
 			<!--immediate="true" um Validierung zu umgehen  -->
 			<p:commandButton value="Abbrechen" icon="pi pi-times-circle"
 				styleClass="ui-button-secondary" action="#{actionController.index}"
 				ajax="false" immediate="true"
 				style="margin-top:22px; margin-left:10px" />
-
 		</h:form>
 	</p:card>
 </h:body>
