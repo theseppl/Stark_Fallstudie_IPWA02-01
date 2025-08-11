@@ -120,7 +120,6 @@ public class Netz {
 	    return notificationDate.format(formatter);
 	}
 
-
 	public void setNotificationDate (LocalDate notificationDate) {
 		this.notificationDate = notificationDate;
 	}
