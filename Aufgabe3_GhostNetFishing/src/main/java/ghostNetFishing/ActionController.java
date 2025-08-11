@@ -25,4 +25,8 @@ public class ActionController implements Serializable {
 	public String person() {
 		return "person";
 	}
+	
+	public String recovery() {
+		return "bergung";
+	}
 }

@@ -143,5 +143,23 @@ public class NetzDAO {
 
         return "uebersichtMeldung.xhtml?faces-redirect=true";
     }
+    
+    public List<Netz> getAllNets() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
+        EntityManager em = emf.createEntityManager();
+        List<Netz> nets = null;
+
+        try {
+            nets = em.createQuery("SELECT n FROM Netz n", Netz.class).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+
+        return nets;
+    }
+
 }
 
