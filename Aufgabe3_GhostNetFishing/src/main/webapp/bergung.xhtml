@@ -27,39 +27,39 @@
 		</h:panelGrid>
 	</div>
 
-	<p:card style="width: 90%; padding: 50px;">
+	<div class="card" style="margin: 20px">
+		<h:form>
+			<p:dataTable value="#{netzDAO.allNets}" var="nets"
+				selection="#{netzDAO.selectedNetze}" rowKey="#{nets.id}"
+				selectionMode="multiple" paginator="true" rows="10">
 
-		<!-- Textbereich -->
-		<div style="flex: 1;">
-			<h:outputText value="NETZBERGUNG"
-				style="font-size: 24px; font-weight: bold;" />
+				<p:column selectionMode="multiple" style="width: 3%" />
 
-			<h1>Gemeldete Netze</h1>
+				<p:column headerText="ID">
+					<h:outputText value="#{nets.id}" />
+				</p:column>
 
-			<h:dataTable value="#{netzDAO.allNets}" var="nets" border="1">
-				<h:column>
-					<f:facet name="header">ID</f:facet>
-            #{nets.ID}
-        </h:column>
-				<h:column>
-					<f:facet name="header">Größe</f:facet>
-            #{nets.netSize}
-        </h:column>
-				<h:column>
-					<f:facet name="header">Datum</f:facet>
-            #{nets.notificationDate}
-        </h:column>
-				<h:column>
-					<f:facet name="header">Breitengrad</f:facet>
-            #{nets.latituteDegree}°#{nets.latituteMinute}'#{nets.latituteSeconds}" #{nets.northSouth},
-        </h:column>
-				<h:column>
-					<f:facet name="header">Längengrad</f:facet>
-            #{nets.longituteDegree}°#{nets.longituteMinute}'#{nets.longituteSeconds}" #{nets.eastWest}
-        </h:column>
-			</h:dataTable>
+				<p:column headerText="Netzgröße in m">
+					<h:outputText value="#{nets.netSize}" />
+				</p:column>
 
-		</div>
-	</p:card>
+				<p:column headerText="Meldungsdatum">
+					<h:outputText value="#{nets.notificationDate}" />
+				</p:column>
+
+				<p:column headerText="Breitengrad">
+					<h:outputText
+						value="#{nets.northSouth} #{nets.latituteDegree}°#{nets.latituteMinute}'#{nets.latituteSeconds}" />
+				</p:column>
+
+				<p:column headerText="Längengrad">
+					<h:outputText
+						value="#{nets.eastWest} #{nets.longituteDegree}°#{nets.longituteMinute}'#{nets.longituteSeconds}" />
+				</p:column>
+			</p:dataTable>
+	
+		</h:form>
+	</div>
+
 </h:body>
 </html>

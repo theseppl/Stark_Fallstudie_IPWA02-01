@@ -3,6 +3,7 @@ package ghostNetFishing;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Objects;
 
 import jakarta.inject.Named;
 import jakarta.persistence.*;
@@ -13,7 +14,7 @@ import jakarta.persistence.*;
 public class Netz {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long ID;
+	private Long id;
 	
 	private String northSouth;
     private int latituteDegree;
@@ -35,12 +36,12 @@ public class Netz {
     
     public Netz() {}
 
-	public Long getID() {
-		return ID;
+	public Long getId() {
+		return id;
 	}
 
-	public void setID(int iD) {
-		ID = (long) iD;
+	public void setId(int iD) {
+		id = (long) iD;
 	}
 
 	public int getLatituteDegree() {
@@ -139,6 +140,19 @@ public class Netz {
 	public void setReportingPerson(Person reportingPerson) {
 		this.reportingPerson = reportingPerson;
 	}
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) return true;
+	    if (obj == null || getClass() != obj.getClass()) return false;
+	    Netz other = (Netz) obj;
+	    return Objects.equals(this.id, other.id);
+	}
+
+	@Override
+	public int hashCode() {
+	    return Objects.hash(id);
+	}
+
 
 }
 

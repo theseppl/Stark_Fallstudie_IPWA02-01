@@ -1,10 +1,13 @@
 package ghostNetFishing;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.enterprise.context.RequestScoped;
+//import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
@@ -13,9 +16,11 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
 @Named("netzDAO")
-@RequestScoped
-public class NetzDAO {
-
+@ViewScoped
+//@RequestScoped
+public class NetzDAO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
     @Inject
     private PersonDAO personDAO;
     private Netz net = new Netz();
@@ -160,6 +165,16 @@ public class NetzDAO {
 
         return nets;
     }
+    private List<Netz> selectedNetze = new ArrayList<>();
+
+    public List<Netz> getSelectedNetze() {
+        return selectedNetze;
+    }
+
+    public void setSelectedNetze(List<Netz> selectedNetze) {
+        this.selectedNetze = selectedNetze;
+    }
+
 
 }
 
