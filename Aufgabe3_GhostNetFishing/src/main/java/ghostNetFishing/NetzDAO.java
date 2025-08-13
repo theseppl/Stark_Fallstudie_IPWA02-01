@@ -155,7 +155,7 @@ public class NetzDAO implements Serializable {
         List<Netz> nets = null;
 
         try {
-            nets = em.createQuery("SELECT n FROM Netz n", Netz.class).getResultList();
+            nets = em.createQuery("SELECT n FROM Netz n WHERE n.status = 'gemeldet'", Netz.class).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -165,20 +165,17 @@ public class NetzDAO implements Serializable {
 
         return nets;
     }
-    public String selectNetz(Netz netz) {
+    public String selectNet(Netz selectedNet) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
 
         try {
             t.begin();
-            Netz managedNetz = em.find(Netz.class, netz.getId());
-            if (managedNetz != null) {
-                managedNetz.setStatus("Bergung bevorstehend");
-                em.merge(managedNetz);
-                FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, 
-                    "Status von Netz #" + managedNetz.getId() + " geändert.", null));
+            Netz managedNet = em.find(Netz.class, selectedNet.getId());
+            if (managedNet != null) {
+                managedNet.setStatus("Bergung bevorstehend");
+                em.merge(managedNet);
             }
             t.commit();
         } catch (Exception e) {

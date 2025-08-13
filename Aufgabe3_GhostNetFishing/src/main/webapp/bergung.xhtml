@@ -32,7 +32,7 @@
 			<p:dataTable value="#{netzDAO.allNets}" var="nets">
 				<p:column headerText="Aktion">
 					<p:commandButton value="Bergen"
-						action="#{netzDAO.selectNetz(nets)}" update="@form" />
+						action="#{netzDAO.selectNet(nets)}" update="@form" />
 				</p:column>
 
 				<p:column headerText="ID">
