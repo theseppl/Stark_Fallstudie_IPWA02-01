@@ -46,6 +46,12 @@ public class NetzDAO implements Serializable {
     public Long getNeuePersonId() {
         return newPersonId;
     }
+    
+    private boolean personValid;
+    public boolean isPersonValid() {
+        return personValid;
+    }
+
 
     private Person findExistingPerson(EntityManager em, Person person) {
         String jpql = "SELECT p FROM Person p WHERE LOWER(TRIM(p.firstName)) = :firstName AND LOWER(TRIM(p.lastName)) = :lastName AND TRIM(p.phoneNumber) = :phone";
@@ -189,6 +195,38 @@ public class NetzDAO implements Serializable {
         }
         return null;
     }
+    
+    //Zur Prüfung der Person bei der Anmeldung zur Bergung des Netzes.
+    public void pruefePerson() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            String personIdStr = personDAO.getPersonId();
+            Person person = personDAO.getPerson();
+
+            if (personIdStr != null && !personIdStr.isBlank()) {
+                try {
+                    Long personId = Long.parseLong(personIdStr);
+                    personValid = em.find(Person.class, personId) != null;
+                } catch (NumberFormatException e) {
+                    personValid = false;
+                }
+            } else {
+                personValid = findExistingPerson(em, person) != null;
+            }
+
+            if (!personValid) {
+                FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Person nicht gefunden", null));
+            }
+
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
 
 
 
