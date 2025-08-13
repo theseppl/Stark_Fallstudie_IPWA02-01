@@ -165,15 +165,35 @@ public class NetzDAO implements Serializable {
 
         return nets;
     }
-    private List<Netz> selectedNetze = new ArrayList<>();
+    public String selectNetz(Netz netz) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction t = em.getTransaction();
 
-    public List<Netz> getSelectedNetze() {
-        return selectedNetze;
+        try {
+            t.begin();
+            Netz managedNetz = em.find(Netz.class, netz.getId());
+            if (managedNetz != null) {
+                managedNetz.setStatus("Bergung bevorstehend");
+                em.merge(managedNetz);
+                FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, 
+                    "Status von Netz #" + managedNetz.getId() + " geändert.", null));
+            }
+            t.commit();
+        } catch (Exception e) {
+            if (t.isActive()) t.rollback();
+            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler beim Aktualisieren!", null));
+        } finally {
+            em.close();
+            emf.close();
+        }
+        return null;
     }
 
-    public void setSelectedNetze(List<Netz> selectedNetze) {
-        this.selectedNetze = selectedNetze;
-    }
+
 
 
 }

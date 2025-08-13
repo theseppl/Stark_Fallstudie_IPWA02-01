@@ -140,19 +140,6 @@ public class Netz {
 	public void setReportingPerson(Person reportingPerson) {
 		this.reportingPerson = reportingPerson;
 	}
-	@Override
-	public boolean equals(Object obj) {
-	    if (this == obj) return true;
-	    if (obj == null || getClass() != obj.getClass()) return false;
-	    Netz other = (Netz) obj;
-	    return Objects.equals(this.id, other.id);
-	}
-
-	@Override
-	public int hashCode() {
-	    return Objects.hash(id);
-	}
-
 
 }
 

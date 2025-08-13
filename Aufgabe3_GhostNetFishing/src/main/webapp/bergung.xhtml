@@ -29,12 +29,12 @@
 
 	<div class="card" style="margin: 20px">
 		<h:form>
-			<p:dataTable value="#{netzDAO.allNets}" var="nets"
-				selection="#{netzDAO.selectedNetze}" rowKey="#{nets.id}"
-				selectionMode="multiple" paginator="true" rows="10">
+			<p:dataTable value="#{netzDAO.allNets}" var="nets">
+				<p:column headerText="Aktion">
+					<p:commandButton value="Bergen"
+						action="#{netzDAO.selectNetz(nets)}" update="@form" />
+				</p:column>
 
-				<p:column selectionMode="multiple" style="width: 3%" />
-				
 				<p:column headerText="ID">
 					<h:outputText value="#{nets.id}" />
 				</p:column>
@@ -57,9 +57,7 @@
 						value="#{nets.eastWest} #{nets.longituteDegree}°#{nets.longituteMinute}'#{nets.longituteSeconds}" />
 				</p:column>
 			</p:dataTable>
-	
 		</h:form>
 	</div>
-
 </h:body>
 </html>
