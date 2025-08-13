@@ -29,10 +29,69 @@
 
 	<div class="card" style="margin: 20px">
 		<h:form>
+			<p:outputPanel id="personPanel" layout="block">
+				<p:card style="width: 30em;">
+					<f:facet name="title">Bitte Informationen zu Ihrer Person eingeben.</f:facet>
+
+					<h:panelGroup layout="block" style="width: 350px; margin: 0 auto;">
+						<div style="display: flex; flex-direction: column; gap: 20px;">
+
+							<p:divider align="center">
+								<span class="ui-tag">Anmeldung über Ihre Personen-ID...</span>
+							</p:divider>
+
+							<div
+								style="display: flex; justify-content: space-between; align-items: center;">
+								<p:outputLabel value="Personen-ID (optional):" for="personId" />
+								<p:inputText id="personId" value="#{personDAO.personId}"
+									size="25" style="width: 200px;">
+									<p:ajax event="blur" update="@form" />
+								</p:inputText>
+							</div>
+
+							<p:divider align="center">
+								<span class="ui-tag">...oder über Ihre persönliche Daten.</span>
+							</p:divider>
+
+							<div
+								style="display: flex; justify-content: space-between; align-items: center;">
+								<p:outputLabel value="Vorname:" for="firstName" />
+								<p:inputText id="firstName"
+									value="#{personDAO.person.firstName}" size="25"
+									style="width: 200px;">
+									<p:ajax event="blur" update="@form" />
+								</p:inputText>
+							</div>
+							<div
+								style="display: flex; justify-content: space-between; align-items: center;">
+								<p:outputLabel value="Nachname:" for="lastName" />
+								<p:inputText id="lastName" value="#{personDAO.person.lastName}"
+									size="25" style="width: 200px;">
+									<p:ajax event="blur" update="@form" />
+								</p:inputText>
+							</div>
+							<div
+								style="display: flex; justify-content: space-between; align-items: center;">
+								<p:outputLabel value="Telefon:" for="phoneNumber" />
+								<p:inputText id="phoneNumber"
+									value="#{personDAO.person.phoneNumber}" size="25"
+									style="width: 200px;">
+									<p:ajax event="blur" update="@form" />
+								</p:inputText>
+							</div>
+							<h:outputText value="Neue Personen-ID: #{netzDAO.neuePersonId}"
+								rendered="#{netzDAO.neuePersonId != null}" />
+						</div>
+					</h:panelGroup>
+				</p:card>
+			</p:outputPanel>
+
+
+
 			<p:dataTable value="#{netzDAO.allNets}" var="nets">
 				<p:column headerText="Aktion">
-					<p:commandButton value="Bergen"
-						action="#{netzDAO.selectNet(nets)}" update="@form" />
+					<p:commandButton value="Bergen" action="#{netzDAO.selectNet(nets)}"
+						update="@form" disabled="#{!netzDAO.personInputValid}" />
 				</p:column>
 
 				<p:column headerText="ID">
