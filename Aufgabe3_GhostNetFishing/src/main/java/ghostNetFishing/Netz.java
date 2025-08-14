@@ -34,6 +34,10 @@ public class Netz {
     @JoinColumn(name = "reportingPerson_ID")
     private Person reportingPerson;
     
+    @ManyToOne
+    @JoinColumn(name = "recoveringPerson_ID")
+    private Person recoveringPerson;
+    
     public Netz() {}
 
 	public Long getId() {
@@ -140,6 +144,16 @@ public class Netz {
 	public void setReportingPerson(Person reportingPerson) {
 		this.reportingPerson = reportingPerson;
 	}
+
+	public Person getRecoveringPerson() {
+		return recoveringPerson;
+	}
+
+	public void setRecoveringPerson(Person recoveringPerson) {
+		this.recoveringPerson = recoveringPerson;
+	}
+	
+	
 
 }
 

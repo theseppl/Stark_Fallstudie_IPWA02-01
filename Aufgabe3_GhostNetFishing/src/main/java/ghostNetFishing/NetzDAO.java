@@ -180,6 +180,32 @@ public class NetzDAO implements Serializable {
             t.begin();
             Netz managedNet = em.find(Netz.class, selectedNet.getId());
             if (managedNet != null) {
+
+                // 🔍 Person ermitteln (über ID oder Daten)
+                Person person = null;
+                String personIdStr = personDAO.getPersonId();
+
+                if (personIdStr != null && !personIdStr.isBlank()) {
+                    try {
+                        Long personId = Long.parseLong(personIdStr);
+                        person = em.find(Person.class, personId);
+                    } catch (NumberFormatException e) {
+                        // Ungültige ID ignorieren
+                    }
+                } else {
+                    person = findExistingPerson(em, personDAO.getPerson());
+                    if (person == null) {
+                        em.persist(personDAO.getPerson());
+                        person = personDAO.getPerson();
+                    }
+                }
+
+                // 🧾 Person als Bergende Person zuweisen
+                if (person != null) {
+                    managedNet.setRecoveringPerson(person);
+                }
+
+                // 🛠️ Status aktualisieren
                 managedNet.setStatus("Bergung bevorstehend");
                 em.merge(managedNet);
 
@@ -209,36 +235,58 @@ public class NetzDAO implements Serializable {
         return "uebersichtBergung.xhtml?faces-redirect=true";
     }
 
+
     
     //Zur Prüfung der Person bei der Anmeldung zur Bergung des Netzes.
     public void checkPerson() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();
+        EntityTransaction t = em.getTransaction();
 
         try {
+            t.begin();
             String personIdStr = personDAO.getPersonId();
             Person person = personDAO.getPerson();
 
             if (personIdStr != null && !personIdStr.isBlank()) {
                 try {
                     Long personId = Long.parseLong(personIdStr);
-                    personValid = em.find(Person.class, personId) != null;
+                    Person existingById = em.find(Person.class, personId);
+                    personValid = existingById != null;
                 } catch (NumberFormatException e) {
                     personValid = false;
                 }
+            } else if (person != null &&
+                       person.getFirstName() != null && !person.getFirstName().trim().isEmpty() &&
+                       person.getLastName() != null && !person.getLastName().trim().isEmpty() &&
+                       person.getPhoneNumber() != null && !person.getPhoneNumber().trim().isEmpty()) {
+
+                Person existing = findExistingPerson(em, person);
+                if (existing != null) {
+                    personValid = true;
+                } else {
+                    em.persist(person);
+                    newPersonId = person.getID();
+                    personValid = true;
+                    FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Neue Person wurde angelegt", null));
+                }
             } else {
-                personValid = findExistingPerson(em, person) != null;
+                personValid = false;
             }
 
-            if (!personValid) {
-                FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Person nicht gefunden", null));
-            }
-
+            t.commit();
+        } catch (Exception e) {
+            if (t.isActive()) t.rollback();
+            e.printStackTrace();
+            personValid = false;
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler bei der Personenprüfung", null));
         } finally {
             em.close();
             emf.close();
         }
     }
+
 }
 
