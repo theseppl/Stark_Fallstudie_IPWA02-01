@@ -43,7 +43,7 @@ public class NetzDAO implements Serializable {
         this.net = net;
     }
 
-    public Long getNeuePersonId() {
+    public Long getNewPersonId() {
         return newPersonId;
     }
     
@@ -197,7 +197,7 @@ public class NetzDAO implements Serializable {
     }
     
     //Zur Prüfung der Person bei der Anmeldung zur Bergung des Netzes.
-    public void pruefePerson() {
+    public void checkPerson() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();
 
@@ -226,10 +226,5 @@ public class NetzDAO implements Serializable {
             emf.close();
         }
     }
-
-
-
-
-
 }
 
