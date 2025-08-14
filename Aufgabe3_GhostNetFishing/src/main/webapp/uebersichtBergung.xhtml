@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:outputStylesheet library="css" name="style.css" />
+
+<h:head>
+	<title>Netz melden</title>
+</h:head>
+
+<h:body>
+
+	<!-- Menüleiste separat -->
+	<h:form>
+		<ui:include src="menubar.xhtml" />
+	</h:form>
+
+	<div class="card">
+		<h:panelGrid columns="2"
+			style="vertical-align: middle; align-items: center;">
+			<p:graphicImage name="whaleLogo.png" library="images" width="40" />
+			<h:outputText value="Shea Sepherd – Ghost Net Fishing"
+				styleClass="logoTitle" />
+		</h:panelGrid>
+	</div>
+
+	<p:card style="width: 90%; padding: 50px;">
+    <h:form>
+        <h1>Zusammenfassung der Netzbergung</h1>
+
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel value="Netz-ID:" />
+            <h:outputText value="#{flash.netzId}" />
+
+            <h:outputLabel value="Netzgröße (m):" />
+            <h:outputText value="#{flash.netzSize}" />
+
+            <h:outputLabel value="Meldungsdatum:" />
+            <h:outputText value="#{flash.notificationDate}" />
+
+            <h:outputLabel value="Breitengrad:" />
+            <h:outputText value="#{flash.locationLat}" />
+
+            <h:outputLabel value="Längengrad:" />
+            <h:outputText value="#{flash.locationLong}" />
+        </h:panelGrid>
+
+        <p:separator />
+        <p:commandButton value="Zurück zur Übersicht" action="bergung.xhtml?faces-redirect=true" />
+    </h:form>
+	</p:card>
+</h:body>
+</html>
