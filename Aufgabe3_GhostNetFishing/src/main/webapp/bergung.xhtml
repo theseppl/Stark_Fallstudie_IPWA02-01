@@ -27,114 +27,126 @@
 		</h:panelGrid>
 	</div>
 
+
 	<!-- Kartenbereich -->
 	<script
 		src="https://maps.google.com/maps/api/js?key=AIzaSyCvCDkYieuUBmMWon_mfLAfjuaeuosuqow&amp;sensor=false"></script>
 
-	<div class="card">
+	<div class="card" style="margin: 20px">
 		<h:form prependId="false">
 			<p:growl id="growl" life="3000" />
 
 			<p:gmap id="gmap" center="53.880257,7.687417" zoom="2" type="TERRAIN"
-				style="width:60%;height:500px" model="#{kartenDAO.circleModel}">
+				style="width:70%;height:500px" model="#{kartenDAO.circleModel}">
 				<p:ajax event="overlaySelect" listener="#{kartenDAO.onCircleSelect}"
-					update="growl" />
+					update="growl" rendered="true" />
 			</p:gmap>
 		</h:form>
 	</div>
 
-	<div class="card" style="margin: 20px">
-		<h:form>
-			<p:outputPanel id="personPanel" layout="block">
-				<p:card style="width: 30em;">
-					<f:facet name="title">Bitte Informationen zu Ihrer Person eingeben.</f:facet>
+	<p:card style="width: 70%; padding: 50px;">
+		<div
+			style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
 
-					<h:panelGroup layout="block" style="width: 350px; margin: 0 auto;">
-						<div style="display: flex; flex-direction: column; gap: 20px;">
+			<div class="card"
+				style="margin: 20px auto; width: 100%; max-width: 1000px;">
+				<h:form>
+					<p:outputPanel id="personPanel" layout="block">
+						<p:card>
+							<f:facet name="title">Bitte Informationen zu Ihrer Person eingeben.</f:facet>
 
-							<p:divider align="center">
-								<span class="ui-tag">Anmeldung über Ihre Personen-ID...</span>
-							</p:divider>
+							<h:panelGroup layout="block"
+								style="width: 350px; margin: 0 auto;">
+								<div style="display: flex; flex-direction: column; gap: 20px;">
 
-							<div
-								style="display: flex; justify-content: space-between; align-items: center;">
-								<p:outputLabel value="Personen-ID (optional):" for="personId" />
-								<p:inputText id="personId" value="#{personDAO.personId}"
-									size="25" style="width: 200px;">
+									<p:divider align="center">
+										<span class="ui-tag">Anmeldung über Ihre Personen-ID...</span>
+									</p:divider>
 
-								</p:inputText>
-							</div>
+									<div
+										style="display: flex; justify-content: space-between; align-items: center;">
+										<p:outputLabel value="Personen-ID (optional):" for="personId" />
+										<p:inputText id="personId" value="#{personDAO.personId}"
+											size="25" style="width: 200px;">
 
-							<p:divider align="center">
-								<span class="ui-tag">...oder über Ihre persönliche Daten.</span>
-							</p:divider>
+										</p:inputText>
+									</div>
 
-							<div
-								style="display: flex; justify-content: space-between; align-items: center;">
-								<p:outputLabel value="Vorname:" for="firstName" />
-								<p:inputText id="firstName"
-									value="#{personDAO.person.firstName}" size="25"
-									style="width: 200px;">
+									<p:divider align="center">
+										<span class="ui-tag">...oder über Ihre persönliche
+											Daten.</span>
+									</p:divider>
 
-								</p:inputText>
-							</div>
-							<div
-								style="display: flex; justify-content: space-between; align-items: center;">
-								<p:outputLabel value="Nachname:" for="lastName" />
-								<p:inputText id="lastName" value="#{personDAO.person.lastName}"
-									size="25" style="width: 200px;">
+									<div
+										style="display: flex; justify-content: space-between; align-items: center;">
+										<p:outputLabel value="Vorname:" for="firstName" />
+										<p:inputText id="firstName"
+											value="#{personDAO.person.firstName}" size="25"
+											style="width: 200px;">
 
-								</p:inputText>
-							</div>
-							<div
-								style="display: flex; justify-content: space-between; align-items: center;">
-								<p:outputLabel value="Telefon:" for="phoneNumber" />
-								<p:inputText id="phoneNumber"
-									value="#{personDAO.person.phoneNumber}" size="25"
-									style="width: 200px;">
+										</p:inputText>
+									</div>
+									<div
+										style="display: flex; justify-content: space-between; align-items: center;">
+										<p:outputLabel value="Nachname:" for="lastName" />
+										<p:inputText id="lastName"
+											value="#{personDAO.person.lastName}" size="25"
+											style="width: 200px;">
 
-								</p:inputText>
-							</div>
-							<h:outputText value="Neue Personen-ID: #{netzDAO.newPersonId}"
-								rendered="#{netzDAO.newPersonId != null}" />
-						</div>
-						<p:commandButton value="Person prüfen"
-							action="#{netzDAO.checkPerson}" update="@form" />
-					</h:panelGroup>
-				</p:card>
-			</p:outputPanel>
+										</p:inputText>
+									</div>
+									<div
+										style="display: flex; justify-content: space-between; align-items: center;">
+										<p:outputLabel value="Telefon:" for="phoneNumber" />
+										<p:inputText id="phoneNumber"
+											value="#{personDAO.person.phoneNumber}" size="25"
+											style="width: 200px;">
 
+										</p:inputText>
+									</div>
+									<h:outputText value="Neue Personen-ID: #{netzDAO.newPersonId}"
+										rendered="#{netzDAO.newPersonId != null}" />
+								</div>
+								<p:commandButton value="Person prüfen"
+									action="#{netzDAO.checkPerson}" update="@form" />
+							</h:panelGroup>
+						</p:card>
+					</p:outputPanel>
 
+					<p:dataTable value="#{netzDAO.allNets}" var="nets"
+						style="width: 100%; max-width: 1000px; margin: 20px auto">
+						<p:column headerText="Aktion">
+							<p:commandButton value="Bergen"
+								action="#{netzDAO.selectNet(nets)}" update="@form"
+								disabled="#{!netzDAO.personValid}" />
+						</p:column>
 
-			<p:dataTable value="#{netzDAO.allNets}" var="nets" style="width: 1000px; margin: 0 auto;">
-				<p:column headerText="Aktion">
-					<p:commandButton value="Bergen" action="#{netzDAO.selectNet(nets)}"
-						update="@form" disabled="#{!netzDAO.personValid}" />
-				</p:column>
+						<p:column headerText="ID">
+							<h:outputText value="#{nets.id}" />
+						</p:column>
 
-				<p:column headerText="ID">
-					<h:outputText value="#{nets.id}" />
-				</p:column>
+						<p:column headerText="Netzgröße in m">
+							<h:outputText value="#{nets.netSize}" />
+						</p:column>
 
-				<p:column headerText="Netzgröße in m">
-					<h:outputText value="#{nets.netSize}" />
-				</p:column>
+						<p:column headerText="Meldungsdatum">
+							<h:outputText value="#{nets.notificationDate}" />
+						</p:column>
 
-				<p:column headerText="Meldungsdatum">
-					<h:outputText value="#{nets.notificationDate}" />
-				</p:column>
+						<p:column headerText="Breitengrad">
+							<h:outputText
+								value="#{nets.northSouth} #{nets.latituteDegree}°#{nets.latituteMinute}'#{nets.latituteSeconds}" />
+						</p:column>
 
-				<p:column headerText="Breitengrad">
-					<h:outputText
-						value="#{nets.northSouth} #{nets.latituteDegree}°#{nets.latituteMinute}'#{nets.latituteSeconds}" />
-				</p:column>
-
-				<p:column headerText="Längengrad">
-					<h:outputText
-						value="#{nets.eastWest} #{nets.longituteDegree}°#{nets.longituteMinute}'#{nets.longituteSeconds}" />
-				</p:column>
-			</p:dataTable>
-		</h:form>
-	</div>
+						<p:column headerText="Längengrad">
+							<h:outputText
+								value="#{nets.eastWest} #{nets.longituteDegree}°#{nets.longituteMinute}'#{nets.longituteSeconds}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</div>
+		</div>
+	</p:card>
+	<p:remoteCommand name="initMapRefresh" update="gmap" autoRun="true" />
 </h:body>
 </html>
