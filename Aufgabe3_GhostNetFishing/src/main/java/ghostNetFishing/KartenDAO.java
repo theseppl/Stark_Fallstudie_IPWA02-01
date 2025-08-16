@@ -46,7 +46,6 @@ public class KartenDAO implements Serializable {
             circle.setFillColor("#ffd700");
             circle.setFillOpacity(0.9);
             circle.setData(nets1.getId());
-            
 
             circleModel.addOverlay(circle);
         }
@@ -67,6 +66,6 @@ public class KartenDAO implements Serializable {
     public void onCircleSelect(OverlaySelectEvent<Long> event) {
         Overlay<Long> overlay = event.getOverlay();
         FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_INFO, "Netz " + overlay.getData() + " ausgewählt", null));
+            new FacesMessage(FacesMessage.SEVERITY_INFO, "Netz mit der ID " + overlay.getData(), null));
     }
 }
