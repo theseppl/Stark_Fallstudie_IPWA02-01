@@ -37,14 +37,14 @@
 			<p:growl id="growl" life="3000" />
 
 			<p:gmap id="gmap" center="53.880257,7.687417" zoom="2" type="TERRAIN"
-				style="width:70%;height:500px" model="#{kartenDAO.circleModel}">
+				style="width:75%;height:500px" model="#{kartenDAO.circleModel}">
 				<p:ajax event="overlaySelect" listener="#{kartenDAO.onCircleSelect}"
 					update="growl" rendered="true" />
 			</p:gmap>
 		</h:form>
 	</div>
 
-	<p:card style="width: 70%; padding: 50px;">
+	<p:card style="width: 75%; padding: 50px;">
 		<div
 			style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
 
@@ -114,7 +114,9 @@
 					</p:outputPanel>
 
 					<p:dataTable value="#{netzDAO.allNets}" var="nets"
-						style="width: 100%; max-width: 1000px; margin: 20px auto">
+						style="width: 100%; max-width: 1000px; margin: 20px auto"
+						paginator="true" rows="10">
+
 						<p:column headerText="Aktion">
 							<p:commandButton value="Bergen"
 								action="#{netzDAO.selectNet(nets)}" update="@form"
@@ -125,7 +127,7 @@
 							<h:outputText value="#{nets.id}" />
 						</p:column>
 
-						<p:column headerText="Netzgröße in m">
+						<p:column headerText="Größe in m²">
 							<h:outputText value="#{nets.netSize}" />
 						</p:column>
 
