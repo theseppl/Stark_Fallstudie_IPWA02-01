@@ -3,7 +3,6 @@ package ghostNetFishing;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Objects;
 
 import jakarta.inject.Named;
 import jakarta.persistence.*;
@@ -152,8 +151,5 @@ public class Netz {
 	public void setRecoveringPerson(Person recoveringPerson) {
 		this.recoveringPerson = recoveringPerson;
 	}
-	
-	
-
 }
 
