@@ -202,7 +202,6 @@
 										<f:validateRegex pattern="^\+?[0-9\s\-]{7,15}$" />
 									</p:inputText>
 									<h:outputText value="#{nachrichten.phone.invalid}" />
-
 								</div>
 								<h:outputText value="Neue Personen-ID: #{netzDAO.newPersonId}"
 									rendered="#{netzDAO.newPersonId != null}" />
@@ -210,6 +209,7 @@
 						</h:panelGroup>
 					</p:card>
 				</p:outputPanel>
+				<!-- Sorgt automatisch für die Fehlermeldungen bei Falscheingabe -->
 				<p:messages autoUpdate="true" showDetail="false" />
 
 				<div
