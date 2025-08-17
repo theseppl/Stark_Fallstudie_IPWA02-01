@@ -33,7 +33,7 @@ public class KartenDAO implements Serializable {
         circleModel = new DefaultMapModel<>();
 
         
-        List<Netz> nets = netzDAO.getAllNets();
+        List<Netz> nets = netzDAO.getAllNets("gemeldet");
 
         for (Netz nets1 : nets) {
             double lat = convertGMS(nets1.getNorthSouth(), nets1.getLatituteDegree(), nets1.getLatituteMinute(), nets1.getLatituteSeconds());

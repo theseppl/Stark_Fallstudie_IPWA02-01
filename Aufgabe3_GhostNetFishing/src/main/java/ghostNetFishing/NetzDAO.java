@@ -155,13 +155,15 @@ public class NetzDAO implements Serializable {
         return "uebersichtMeldung.xhtml?faces-redirect=true";
     }
     
-    public List<Netz> getAllNets() {
+    public List<Netz> getAllNets(String status) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         List<Netz> nets = null;
 
         try {
-            nets = em.createQuery("SELECT n FROM Netz n WHERE n.status = 'gemeldet'", Netz.class).getResultList();
+        	nets = em.createQuery("SELECT n FROM Netz n WHERE n.status = :status", Netz.class)
+                    .setParameter("status", status)
+                    .getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

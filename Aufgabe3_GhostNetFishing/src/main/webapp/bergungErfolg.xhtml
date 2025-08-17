@@ -8,7 +8,7 @@
 <h:outputStylesheet library="css" name="style.css" />
 
 <h:head>
-	<title>Gemeldete Netze</title>
+	<title>Bergungserfolg melden</title>
 </h:head>
 
 <h:body>
@@ -25,23 +25,6 @@
 			<h:outputText value="Shea Sepherd – Ghost Net Fishing"
 				styleClass="logoTitle" />
 		</h:panelGrid>
-	</div>
-
-
-	<!-- Kartenbereich -->
-	<script
-		src="https://maps.google.com/maps/api/js?key=AIzaSyCvCDkYieuUBmMWon_mfLAfjuaeuosuqow&amp;sensor=false"></script>
-
-	<div class="card" style="margin: 20px">
-		<h:form prependId="false">
-			<p:growl id="growl" life="3000" />
-
-			<p:gmap id="gmap" center="53.880257,7.687417" zoom="2" type="TERRAIN"
-				style="width:75%;height:500px" model="#{kartenDAO.circleModel}">
-				<p:ajax event="overlaySelect" listener="#{kartenDAO.onCircleSelect}"
-					update="growl" rendered="true" />
-			</p:gmap>
-		</h:form>
 	</div>
 
 	<p:card style="width: 75%; padding: 50px;">
@@ -113,7 +96,7 @@
 					</p:outputPanel>
 					<p:messages autoUpdate="true" showDetail="false" />
 
-					<p:dataTable value="#{netzDAO.getAllNets('gemeldet')}" var="nets"
+					<p:dataTable value="#{netzDAO.getAllNets('Bergung bevorstehend')}" var="nets"
 						style="width: 100%; max-width: 1000px; margin: 20px auto"
 						paginator="true" rows="10">
 
@@ -149,6 +132,5 @@
 			</div>
 		</div>
 	</p:card>
-	<p:remoteCommand name="initMapRefresh" update="gmap" autoRun="true" />
 </h:body>
 </html>
