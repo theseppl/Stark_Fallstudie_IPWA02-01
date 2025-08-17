@@ -22,10 +22,6 @@ public class ActionController implements Serializable {
 		return "meldung";
 	}
 	
-	public String person() {
-		return "person";
-	}
-	
 	public String recovery() {
 		return "bergung";
 	}
