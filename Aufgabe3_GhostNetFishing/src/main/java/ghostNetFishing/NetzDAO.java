@@ -1,7 +1,6 @@
 package ghostNetFishing;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 //import jakarta.enterprise.context.RequestScoped;
@@ -173,7 +172,7 @@ public class NetzDAO implements Serializable {
 
         return nets;
     }
-    public String selectNet(Netz selectedNet) {
+    public String selectNet(Netz selectedNet, String statusNew) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
@@ -208,7 +207,7 @@ public class NetzDAO implements Serializable {
                 }
 
                 // 🛠️ Status aktualisieren
-                managedNet.setStatus("Bergung bevorstehend");
+                managedNet.setStatus(statusNew);
                 em.merge(managedNet);
 
                 // 🔁 Flash-Attribute setzen

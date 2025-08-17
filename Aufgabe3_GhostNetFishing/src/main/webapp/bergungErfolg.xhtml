@@ -26,7 +26,6 @@
 				styleClass="logoTitle" />
 		</h:panelGrid>
 	</div>
-
 	<p:card style="width: 75%; padding: 50px;">
 		<div
 			style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
@@ -36,7 +35,7 @@
 				<h:form>
 					<p:outputPanel id="personPanel" layout="block">
 						<p:card>
-							<f:facet name="title">Bitte Informationen zu Ihrer Person eingeben.</f:facet>
+							<f:facet name="title">Anmelden um Bergungserfolg zu melden</f:facet>
 
 							<h:panelGroup layout="block"
 								style="width: 350px; margin: 0 auto;">
@@ -96,13 +95,14 @@
 					</p:outputPanel>
 					<p:messages autoUpdate="true" showDetail="false" />
 
-					<p:dataTable value="#{netzDAO.getAllNets('Bergung bevorstehend')}" var="nets"
+					<p:dataTable value="#{netzDAO.getAllNets('Bergung bevorstehend')}"
+						var="nets"
 						style="width: 100%; max-width: 1000px; margin: 20px auto"
 						paginator="true" rows="10">
 
 						<p:column headerText="Aktion">
-							<p:commandButton value="Bergen"
-								action="#{netzDAO.selectNet(nets)}" update="@form"
+							<p:commandButton value="Bergung erfolgreich"
+								action="#{netzDAO.selectNet(nets, 'geborgen')}" update="@form"
 								disabled="#{!netzDAO.personValid}" />
 						</p:column>
 
