@@ -25,7 +25,10 @@ public class NetzDAO implements Serializable {
     private Netz net = new Netz();
     private boolean anonym;
     private Long newPersonId; // 🆕 ID der neu gespeicherten Person
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit"); //Eine EntityManagerFactory für Klasse
 
+    
+    
     public Netz getNet() {
         return net;
     }
@@ -76,7 +79,6 @@ public class NetzDAO implements Serializable {
     }
 
     public String saveNet() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
 
@@ -135,7 +137,6 @@ public class NetzDAO implements Serializable {
             return null;
         } finally {
             em.close();
-            emf.close();
         }
 
         // Flash-Attribute für Weiterleitung
@@ -155,7 +156,6 @@ public class NetzDAO implements Serializable {
     }
     
     public List<Netz> getAllNets(String status) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         List<Netz> nets = null;
 
@@ -167,13 +167,11 @@ public class NetzDAO implements Serializable {
             e.printStackTrace();
         } finally {
             em.close();
-            emf.close();
         }
 
         return nets;
     }
     public String selectNet(Netz selectedNet, String statusNew) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
 
@@ -229,7 +227,6 @@ public class NetzDAO implements Serializable {
             return null;
         } finally {
             em.close();
-            emf.close();
         }
 
         // 🔁 Weiterleitung zur Zusammenfassungsseite
@@ -240,7 +237,6 @@ public class NetzDAO implements Serializable {
     
     //Zur Prüfung der Person bei der Anmeldung zur Bergung des Netzes.
     public void checkPerson() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
 
@@ -285,7 +281,6 @@ public class NetzDAO implements Serializable {
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler bei der Personenprüfung", null));
         } finally {
             em.close();
-            emf.close();
         }
     }
 
