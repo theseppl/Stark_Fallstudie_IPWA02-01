@@ -12,6 +12,7 @@ import jakarta.persistence.Persistence;
 public class PersonDAO {
 	private Person person = new Person(); // wird z. B. über ein Formular gefüllt
 	private String personId; //zur Prüfung ob ID bereits vorhanden
+	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit"); //Eine EntityManagerFactory für Klasse
 	
 	public String getPersonId() {
 	    return personId;
@@ -26,8 +27,6 @@ public class PersonDAO {
     }
 
     public String setPerson() {
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
 
@@ -40,7 +39,6 @@ public class PersonDAO {
             e.printStackTrace(); // oder logger.error(...)
         } finally {
             em.close();
-            emf.close();
         }
         
         return "index";
