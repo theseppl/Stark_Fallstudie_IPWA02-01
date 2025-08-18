@@ -27,7 +27,6 @@
 		</h:panelGrid>
 	</div>
 
-
 	<!-- Kartenbereich -->
 	<script
 		src="https://maps.google.com/maps/api/js?key=AIzaSyCvCDkYieuUBmMWon_mfLAfjuaeuosuqow&amp;sensor=false"></script>
@@ -119,8 +118,8 @@
 
 						<p:column headerText="Aktion">
 							<p:commandButton value="Bergen"
-								action="#{netzDAO.selectNet(nets, 'Bergung bevorstehend')}" update="@form"
-								disabled="#{!netzDAO.personValid}" />
+								action="#{netzDAO.selectNet(nets, 'Bergung bevorstehend')}"
+								update="@form" disabled="#{!netzDAO.personValid}" />
 						</p:column>
 
 						<p:column headerText="ID">

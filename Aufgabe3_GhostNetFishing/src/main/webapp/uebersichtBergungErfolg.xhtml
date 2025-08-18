@@ -28,29 +28,30 @@
 	</div>
 
 	<p:card style="width: 90%; padding: 50px;">
-    <h:form>
-        <h1>Ihre erfolgreiche Netzbergung. Danke!</h1>
+		<h:form>
+			<h1>Ihre erfolgreiche Netzbergung. Danke!</h1>
 
-        <h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel value="Netz-ID:" />
-            <h:outputText value="#{flash.netzId}" />
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="Netz-ID:" />
+				<h:outputText value="#{flash.netzId}" />
 
-            <h:outputLabel value="Netzgröße (m):" />
-            <h:outputText value="#{flash.netzSize}" />
+				<h:outputLabel value="Netzgröße (m):" />
+				<h:outputText value="#{flash.netzSize}" />
 
-            <h:outputLabel value="Meldungsdatum:" />
-            <h:outputText value="#{flash.notificationDate}" />
+				<h:outputLabel value="Meldungsdatum:" />
+				<h:outputText value="#{flash.notificationDate}" />
 
-            <h:outputLabel value="Breitengrad:" />
-            <h:outputText value="#{flash.locationLat}" />
+				<h:outputLabel value="Breitengrad:" />
+				<h:outputText value="#{flash.locationLat}" />
 
-            <h:outputLabel value="Längengrad:" />
-            <h:outputText value="#{flash.locationLong}" />
-        </h:panelGrid>
+				<h:outputLabel value="Längengrad:" />
+				<h:outputText value="#{flash.locationLong}" />
+			</h:panelGrid>
 
-        <p:separator />
-        <p:commandButton value="Zurück zur Startseite" action="index.xhtml?faces-redirect=true" />
-    </h:form>
+			<p:separator />
+			<p:commandButton value="Zurück zur Startseite"
+				action="index.xhtml?faces-redirect=true" />
+		</h:form>
 	</p:card>
 </h:body>
 </html>
