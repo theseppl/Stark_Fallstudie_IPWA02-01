@@ -26,34 +26,26 @@ public class NetzDAO implements Serializable {
     private boolean anonym;
     private Long newPersonId; // 🆕 ID der neu gespeicherten Person
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit"); //Eine EntityManagerFactory für Klasse
-
-    
     
     public Netz getNet() {
         return net;
     }
-
     public boolean isAnonym() {
         return anonym;
     }
-
     public void setAnonym(boolean anonym) {
         this.anonym = anonym;
     }
-
     public void setNet(Netz net) {
         this.net = net;
     }
-
     public Long getNewPersonId() {
         return newPersonId;
     }
-    
     private boolean personValid;
     public boolean isPersonValid() {
         return personValid;
     }
-
 
     private Person findExistingPerson(EntityManager em, Person person) {
         String jpql = "SELECT p FROM Person p WHERE LOWER(TRIM(p.firstName)) = :firstName AND LOWER(TRIM(p.lastName)) = :lastName AND TRIM(p.phoneNumber) = :phone";
@@ -84,7 +76,6 @@ public class NetzDAO implements Serializable {
 
         try {
             t.begin();
-
             if (!anonym) {
                 // 🔒 Validierung: Entweder ID oder alle Felder müssen ausgefüllt sein
                 if (!isPersonInputValid()) {
@@ -93,7 +84,6 @@ public class NetzDAO implements Serializable {
                         "Bitte geben Sie entweder eine Personen-ID oder alle drei Felder (Vorname, Nachname, Telefon) ein.", null));
                     return null;
                 }
-
                 Person person = personDAO.getPerson();
                 String personIdStr = personDAO.getPersonId();
 
@@ -230,7 +220,16 @@ public class NetzDAO implements Serializable {
         }
 
         // 🔁 Weiterleitung zur Zusammenfassungsseite
-        return "uebersichtBergung.xhtml?faces-redirect=true";
+     // 🔁 Weiterleitung abhängig vom Status
+        if ("Bergung bevorstehend".equalsIgnoreCase(statusNew)) {
+            return "uebersichtBergung.xhtml?faces-redirect=true";
+            } 
+        else if ("geborgen".equalsIgnoreCase(statusNew)) {
+            return "uebersichtBergungErfolg.xhtml?faces-redirect=true";
+        }
+        else {
+            return "index.xhtml?faces-redirect=true"; // oder eine andere Standardseite
+        }
     }
 
 
