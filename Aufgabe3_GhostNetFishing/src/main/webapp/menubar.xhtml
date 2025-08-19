@@ -1,13 +1,18 @@
+<!-- Menüleiste für die Anwendung -->
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+	<!-- Menüleiste mit kurzer Verzögerung beim Ausblenden -->
 	<p:menubar hideDelay="1000">
+
+		<!-- Menüpunkt zur Rückkehr zur Startseite -->
 		<p:menuitem value="Startseite" icon="pi pi-fw pi-home"
 			action="#{actionController.index}" />
 
+		<!-- Untermenü für netzbezogene Aktionen -->
 		<p:submenu label="Aktionen" icon="pi pi-megaphone">
 			<p:menuitem value="Netz melden" icon="pi pi-bell"
 				action="#{actionController.notification}" />
@@ -19,6 +24,7 @@
 
 		<p:divider layout="vertical" />
 
+		<!-- Menüpunkt zum Aufruf des Impressums -->
 		<p:menuitem value="Impressum" icon="pi pi-fw pi-book"
 			action="#{actionController.impressum}" />
 

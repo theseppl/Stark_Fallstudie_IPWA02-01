@@ -5,6 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<!-- Einbindung eines externen Stylesheets -->
 <h:outputStylesheet library="css" name="style.css" />
 
 <h:head>
@@ -13,11 +14,12 @@
 
 <h:body>
 
-	<!-- Menüleiste separat -->
+	<!-- Einbindung der Menüleiste über Facelets -->
 	<h:form>
 		<ui:include src="menubar.xhtml" />
 	</h:form>
 
+	<!-- Kopfbereich mit Logo und Titel -->
 	<div class="card">
 		<h:panelGrid columns="2"
 			style="vertical-align: middle; align-items: center;">
@@ -30,9 +32,13 @@
 	<p:card style="width: 50%; padding: 50px;">
 		<div
 			style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-			<!-- Hauptformular -->
+
+			<!-- Formular zur Meldung eines Geisternetzes -->
 			<h:form>
+
+				<!-- Accordion mit drei Tabs für Fundort und Netzdetails -->
 				<p:accordionPanel widgetVar="basic" scrollIntoView="center">
+
 					<!-- TAB 1: Breitengrad -->
 					<p:tab title="Breitengrad des Fundortes (N/S xx° xx' xx&quot;)">
 						<h:panelGrid columns="8" cellpadding="8"
@@ -146,7 +152,7 @@
 					</p:tab>
 				</p:accordionPanel>
 
-				<!-- Toggle + Buttons -->
+				<!-- Option zur anonymen Meldung -->
 				<p:card style="margin: 20px 0">
 					<h4>Wollen Sie das Geisternetz anonym melden?</h4>
 					<p:selectBooleanButton value="#{netzDAO.anonym}" onLabel="Ja"
@@ -156,7 +162,7 @@
 					</p:selectBooleanButton>
 				</p:card>
 
-				<!-- Personendaten nur anzeigen, wenn nicht anonym -->
+				<!-- Eingabe persönlicher Daten, falls nicht anonym -->
 				<p:outputPanel id="personPanel" layout="block">
 					<p:card rendered="#{!netzDAO.anonym}">
 						<f:facet name="title">Bitte Informationen zu Ihrer Person eingeben.</f:facet>
@@ -209,13 +215,18 @@
 						</h:panelGroup>
 					</p:card>
 				</p:outputPanel>
-				<!-- Sorgt automatisch für die Fehlermeldungen bei Falscheingabe -->
+
+				<!-- Anzeige von System- und Validierungsmeldungen -->
 				<p:messages autoUpdate="true" showDetail="false" />
 
 				<div
 					style="display: flex; justify-content: center; gap: 10px; margin-top: 22px;">
+
+					<!-- Button zur Bestätigung und Speicherung der Netzmeldung -->
 					<p:commandButton value="Bestätigen" icon="pi pi-check-circle"
 						action="#{netzDAO.saveNet}" ajax="false" />
+
+					<!-- Button zum Abbrechen und Rückkehr zur Startseite -->
 					<p:commandButton value="Abbrechen" icon="pi pi-times-circle"
 						styleClass="ui-button-secondary"
 						action="#{actionController.index}" ajax="false" immediate="true" />

@@ -5,6 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<!-- Einbindung eines externen Stylesheets -->
 <h:outputStylesheet library="css" name="style.css" />
 
 <h:head>
@@ -13,11 +14,12 @@
 
 <h:body>
 
-	<!-- Menüleiste wird eingebunden. Dafür xmlns:ui="http://java.sun.com/jsf/facelets" notwendig. -->
+	<!-- Einbindung der Menüleiste über Facelets -->
 	<h:form>
 		<ui:include src="menubar.xhtml" />
 	</h:form>
 
+	<!-- Kopfbereich mit Logo und Titel -->
 	<div class="card">
 		<h:panelGrid columns="2"
 			style="vertical-align: middle; align-items: center;">
@@ -49,8 +51,6 @@
 			</p>
 			<p>Walflosse im Header: Foto von Sebastian Stark (eigene
 				Darstellung)</p>
-
-
 		</div>
 	</p:card>
 </h:body>

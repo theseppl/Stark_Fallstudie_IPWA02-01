@@ -5,6 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<!-- Einbindung eines externen Stylesheets -->
 <h:outputStylesheet library="css" name="style.css" />
 
 <h:head>
@@ -13,11 +14,12 @@
 
 <h:body>
 
-	<!-- Menüleiste separat -->
+	<!-- Einbindung der Menüleiste über Facelets -->
 	<h:form>
 		<ui:include src="menubar.xhtml" />
 	</h:form>
 
+	<!-- Kopfbereich mit Logo und Titel -->
 	<div class="card">
 		<h:panelGrid columns="2"
 			style="vertical-align: middle; align-items: center;">
@@ -29,6 +31,7 @@
 
 	<p:card style="width: 90%; padding: 50px;">
 		<h:form>
+			<!-- Anzeige der übergebenen Daten aus dem Flash-Scope -->
 			<h:panelGroup rendered="#{flash.newPersonId != null}">
 				<h:outputText
 					value="Ihre neue Personen-ID lautet: #{flash.newPersonId}" />
@@ -49,6 +52,8 @@
 			<br />
 			<h:outputText value="Sichtungsdatum: #{flash.sightingDate}" />
 			<br />
+
+			<!-- Button zum Abbrechen und Rückkehr zur Startseite -->
 			<p:commandButton value="Zur Startseite"
 				action="index.xhtml?faces-redirect=true" />
 		</h:form>

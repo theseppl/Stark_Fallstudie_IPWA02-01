@@ -5,6 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<!-- Einbindung eines externen Stylesheets -->
 <h:outputStylesheet library="css" name="style.css" />
 
 <h:head>
@@ -13,11 +14,12 @@
 
 <h:body>
 
-	<!-- Menüleiste wird eingebunden. Dafür xmlns:ui="http://java.sun.com/jsf/facelets" notwendig. -->
+	<!-- Einbindung der Menüleiste über Facelets -->
 	<h:form>
 		<ui:include src="menubar.xhtml" />
 	</h:form>
 
+	<!-- Kopfbereich mit Logo und Titel -->
 	<div class="card">
 		<h:panelGrid columns="2"
 			style="vertical-align: middle; align-items: center;">
@@ -26,6 +28,8 @@
 				styleClass="logoTitle" />
 		</h:panelGrid>
 	</div>
+
+	<!-- Hauptbereich zur Meldung eines Bergungserfolgs -->
 	<p:card style="width: 75%; padding: 50px;">
 		<div
 			style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
@@ -33,6 +37,7 @@
 			<div class="card"
 				style="margin: 20px auto; width: 100%; max-width: 1000px;">
 				<h:form>
+					<!-- Formular zur Identifikation der Person -->
 					<p:outputPanel id="personPanel" layout="block">
 						<p:card>
 							<f:facet name="title">Anmelden um Bergungserfolg zu melden</f:facet>
@@ -41,6 +46,7 @@
 								style="width: 350px; margin: 0 auto;">
 								<div style="display: flex; flex-direction: column; gap: 20px;">
 
+									<!-- Anmeldung über Personen-ID -->
 									<p:divider align="center">
 										<span class="ui-tag">Anmeldung über Ihre Personen-ID...</span>
 									</p:divider>
@@ -54,6 +60,7 @@
 										</p:inputText>
 									</div>
 
+									<!-- Alternativ: Anmeldung über persönliche Daten -->
 									<p:divider align="center">
 										<span class="ui-tag">...oder über Ihre persönliche
 											Daten.</span>
@@ -76,6 +83,8 @@
 											style="width: 200px;">
 										</p:inputText>
 									</div>
+
+									<!-- Telefonnummer mit Validierung -->
 									<div
 										style="display: flex; justify-content: space-between; align-items: center;">
 										<p:outputLabel value="Telefon:" for="phoneNumber" />
@@ -85,6 +94,8 @@
 											<f:validateRegex pattern="^\+?[0-9\s\-]{7,15}$" />
 										</p:inputText>
 									</div>
+
+									<!-- Anzeige einer neuen Personen-ID, falls vergeben -->
 									<h:outputText value="Neue Personen-ID: #{netzDAO.newPersonId}"
 										rendered="#{netzDAO.newPersonId != null}" />
 								</div>
@@ -93,19 +104,24 @@
 							</h:panelGroup>
 						</p:card>
 					</p:outputPanel>
+
+					<!-- Anzeige von System- und Validierungsmeldungen -->
 					<p:messages autoUpdate="true" showDetail="false" />
 
+					<!-- Tabelle mit Netzen, die zur Bergung angemeldet sind -->
 					<p:dataTable value="#{netzDAO.getAllNets('Bergung bevorstehend')}"
 						var="nets"
 						style="width: 100%; max-width: 1000px; margin: 20px auto"
 						paginator="true" rows="10">
 
+						<!-- Button zur Bestätigung des Bergungserfolgs -->
 						<p:column headerText="Aktion">
 							<p:commandButton value="Bergung erfolgreich"
 								action="#{netzDAO.selectNet(nets, 'geborgen')}" update="@form"
 								disabled="#{!netzDAO.personValid}" />
 						</p:column>
 
+						<!-- Anzeige der Netzdetails -->
 						<p:column headerText="ID">
 							<h:outputText value="#{nets.id}" />
 						</p:column>

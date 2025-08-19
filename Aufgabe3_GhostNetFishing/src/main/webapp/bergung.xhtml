@@ -5,6 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<!-- Einbindung eines externen Stylesheets -->
 <h:outputStylesheet library="css" name="style.css" />
 
 <h:head>
@@ -13,11 +14,12 @@
 
 <h:body>
 
-	<!-- Menüleiste wird eingebunden. Dafür xmlns:ui="http://java.sun.com/jsf/facelets" notwendig. -->
+	<!-- Einbindung der Menüleiste über Facelets -->
 	<h:form>
 		<ui:include src="menubar.xhtml" />
 	</h:form>
 
+	<!-- Kopfbereich mit Logo und Titel -->
 	<div class="card">
 		<h:panelGrid columns="2"
 			style="vertical-align: middle; align-items: center;">
@@ -43,6 +45,7 @@
 		</h:form>
 	</div>
 
+	<!-- Formularbereich zur Anmeldung für die Bergung -->
 	<p:card style="width: 75%; padding: 50px;">
 		<div
 			style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
@@ -50,6 +53,8 @@
 			<div class="card"
 				style="margin: 20px auto; width: 100%; max-width: 1000px;">
 				<h:form>
+
+					<!-- Eingabebereich für Personendaten -->
 					<p:outputPanel id="personPanel" layout="block">
 						<p:card>
 							<f:facet name="title">Anmelden um für Bergung zu registrieren</f:facet>
@@ -58,6 +63,7 @@
 								style="width: 350px; margin: 0 auto;">
 								<div style="display: flex; flex-direction: column; gap: 20px;">
 
+									<!-- Eingabe über Personen-ID -->
 									<p:divider align="center">
 										<span class="ui-tag">Anmeldung über Ihre Personen-ID...</span>
 									</p:divider>
@@ -71,6 +77,7 @@
 										</p:inputText>
 									</div>
 
+									<!-- Alternativ: Eingabe über persönliche Daten -->
 									<p:divider align="center">
 										<span class="ui-tag">...oder über Ihre persönliche
 											Daten.</span>
@@ -93,6 +100,8 @@
 											style="width: 200px;">
 										</p:inputText>
 									</div>
+
+									<!-- Telefonnummer mit Validierung -->
 									<div
 										style="display: flex; justify-content: space-between; align-items: center;">
 										<p:outputLabel value="Telefon:" for="phoneNumber" />
@@ -110,12 +119,16 @@
 							</h:panelGroup>
 						</p:card>
 					</p:outputPanel>
+
+					<!-- Anzeige von Validierungs- oder Systemmeldungen -->
 					<p:messages autoUpdate="true" showDetail="false" />
 
+					<!-- Tabelle mit allen gemeldeten Netzen -->
 					<p:dataTable value="#{netzDAO.getAllNets('gemeldet')}" var="nets"
 						style="width: 100%; max-width: 1000px; margin: 20px auto"
 						paginator="true" rows="10">
 
+						<!-- Button zur Anmeldung für die Bergung -->
 						<p:column headerText="Aktion">
 							<p:commandButton value="Bergen"
 								action="#{netzDAO.selectNet(nets, 'Bergung bevorstehend')}"
@@ -148,6 +161,8 @@
 			</div>
 		</div>
 	</p:card>
+
+	<!-- Initialer Karten-Refresh beim Laden der Seite -->
 	<p:remoteCommand name="initMapRefresh" update="gmap" autoRun="true" />
 </h:body>
 </html>

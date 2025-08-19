@@ -5,6 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<!-- Einbindung eines externen Stylesheets -->
 <h:outputStylesheet library="css" name="style.css" />
 
 <h:head>
@@ -13,11 +14,12 @@
 
 <h:body>
 
-	<!-- Menüleiste separat -->
+	<!-- Einbindung der Menüleiste über Facelets -->
 	<h:form>
 		<ui:include src="menubar.xhtml" />
 	</h:form>
 
+	<!-- Kopfbereich mit Logo und Titel -->
 	<div class="card">
 		<h:panelGrid columns="2"
 			style="vertical-align: middle; align-items: center;">
@@ -31,6 +33,7 @@
 		<h:form>
 			<h1>Zusammenfassung der geplanten Netzbergung</h1>
 
+			<!-- Anzeige der übergebenen Daten aus dem Flash-Scope -->
 			<h:panelGrid columns="2" cellpadding="5">
 				<h:outputLabel value="Netz-ID:" />
 				<h:outputText value="#{flash.netzId}" />
@@ -49,6 +52,8 @@
 			</h:panelGrid>
 
 			<p:separator />
+			
+			<!-- Button zum Abbrechen und Rückkehr zur Startseite -->
 			<p:commandButton value="Zurück zur Startseite"
 				action="index.xhtml?faces-redirect=true" />
 		</h:form>
