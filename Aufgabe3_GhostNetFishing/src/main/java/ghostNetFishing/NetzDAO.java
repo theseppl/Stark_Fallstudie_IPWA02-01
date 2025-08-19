@@ -3,7 +3,6 @@ package ghostNetFishing;
 import java.io.Serializable;
 import java.util.List;
 
-//import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -14,18 +13,27 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
+/**
+ * DAO-Klasse zur Verwaltung von Netz-Aktivitäten.
+ * Beinhaltet Validierung, Speicherung von Netzen und durch Aktionen verbundene Personen
+ */
+
 @Named("netzDAO")
 @ViewScoped
-//@RequestScoped
 public class NetzDAO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	// Zugriff auf die eingegebene oder ausgewählte Person
     @Inject
     private PersonDAO personDAO;
+    // Das aktuell zu speichernde Netz
     private Netz net = new Netz();
+    // Flag zur Kennzeichnung einer anonymen Meldung
     private boolean anonym;
-    private Long newPersonId; // 🆕 ID der neu gespeicherten Person
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit"); //Eine EntityManagerFactory für Klasse
+    // ID einer neu gespeicherten Person (falls erforderlich)
+    private Long newPersonId;
+    // EntityManagerFactory für Datenbankzugriffe
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
     
     public Netz getNet() {
         return net;
@@ -47,6 +55,10 @@ public class NetzDAO implements Serializable {
         return personValid;
     }
 
+    /**
+     * Sucht eine existierende Person anhand von Vorname, Nachname und Telefonnummer.
+     * Vermeidet doppelte Einträge bei manueller Eingabe.
+     */
     private Person findExistingPerson(EntityManager em, Person person) {
         String jpql = "SELECT p FROM Person p WHERE LOWER(TRIM(p.firstName)) = :firstName AND LOWER(TRIM(p.lastName)) = :lastName AND TRIM(p.phoneNumber) = :phone";
         List<Person> result = em.createQuery(jpql, Person.class)
@@ -57,6 +69,9 @@ public class NetzDAO implements Serializable {
         return result.isEmpty() ? null : result.get(0);
     }
     
+    /**
+     * Prüft, ob entweder eine Personen-ID oder alle Pflichtfelder für eine neue Person ausgefüllt sind.
+     */
     public boolean isPersonInputValid() {
         String id = personDAO.getPersonId();
         Person p = personDAO.getPerson();
@@ -69,7 +84,11 @@ public class NetzDAO implements Serializable {
 
         return idInput || personalDatesInput;
     }
-
+    
+    /**
+     * Speichert ein Netz in der Datenbank.
+     * Validiert die Personenangaben und verknüpft das Netz mit einer existierenden oder neuen Person.
+     */
     public String saveNet() {
         EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
@@ -77,7 +96,7 @@ public class NetzDAO implements Serializable {
         try {
             t.begin();
             if (!anonym) {
-                // 🔒 Validierung: Entweder ID oder alle Felder müssen ausgefüllt sein
+            	// Validierung der Personenangaben
                 if (!isPersonInputValid()) {
                     FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -86,7 +105,8 @@ public class NetzDAO implements Serializable {
                 }
                 Person person = personDAO.getPerson();
                 String personIdStr = personDAO.getPersonId();
-
+                
+                // Verarbeitung nach Eingabe einer Personen-ID
                 if (personIdStr != null && !personIdStr.isBlank()) {
                     try {
                         Long personId = Long.parseLong(personIdStr);
@@ -105,6 +125,7 @@ public class NetzDAO implements Serializable {
                         return null;
                     }
                 } else {
+                	// Verarbeitung bei manueller Eingabe
                     Person existing = findExistingPerson(em, person);
                     if (existing != null) {
                         net.setReportingPerson(existing);
@@ -115,7 +136,7 @@ public class NetzDAO implements Serializable {
                     }
                 }
             }
-
+            // Netz speichern
             em.persist(net);
             t.commit();
 
@@ -129,7 +150,7 @@ public class NetzDAO implements Serializable {
             em.close();
         }
 
-        // Flash-Attribute für Weiterleitung
+        // Übergabe von Daten für die nächste Seite via Flash-Context
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("newPersonId", newPersonId);
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("northSouth", net.getNorthSouth());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latDegree", net.getLatituteDegree());
@@ -145,6 +166,7 @@ public class NetzDAO implements Serializable {
         return "uebersichtMeldung.xhtml?faces-redirect=true";
     }
     
+    //  Liefert alle Netze mit einem bestimmten Status aus der Datenbank.
     public List<Netz> getAllNets(String status) {
         EntityManager em = emf.createEntityManager();
         List<Netz> nets = null;
@@ -161,6 +183,11 @@ public class NetzDAO implements Serializable {
 
         return nets;
     }
+    
+    /**
+     * Aktualisiert den Status eines ausgewählten Netzes und verknüpft es mit einer Person.
+     * Leitet anschließend abhängig vom neuen Status auf die passende Übersichtsseite weiter.
+     */
     public String selectNet(Netz selectedNet, String statusNew) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
@@ -170,7 +197,7 @@ public class NetzDAO implements Serializable {
             Netz managedNet = em.find(Netz.class, selectedNet.getId());
             if (managedNet != null) {
 
-                // 🔍 Person ermitteln (über ID oder Daten)
+                // Person anhand ID oder Eingabedaten ermitteln
                 Person person = null;
                 String personIdStr = personDAO.getPersonId();
 
@@ -189,16 +216,16 @@ public class NetzDAO implements Serializable {
                     }
                 }
 
-                // 🧾 Person als Bergende Person zuweisen
+                // Person als bergende Person zuweisen
                 if (person != null) {
                     managedNet.setRecoveringPerson(person);
                 }
 
-                // 🛠️ Status aktualisieren
+                // Status aktualisieren und speichern
                 managedNet.setStatus(statusNew);
                 em.merge(managedNet);
 
-                // 🔁 Flash-Attribute setzen
+                // Flash-Attribute für die nächste Seite setzen
                 FacesContext fc = FacesContext.getCurrentInstance();
                 fc.getExternalContext().getFlash().put("netzId", managedNet.getId());
                 fc.getExternalContext().getFlash().put("netzSize", managedNet.getNetSize());
@@ -219,8 +246,7 @@ public class NetzDAO implements Serializable {
             em.close();
         }
 
-        // 🔁 Weiterleitung zur Zusammenfassungsseite
-     // 🔁 Weiterleitung abhängig vom Status
+        // Weiterleitung abhängig vom neuen Status
         if ("Bergung bevorstehend".equalsIgnoreCase(statusNew)) {
             return "uebersichtBergung.xhtml?faces-redirect=true";
             } 
@@ -228,13 +254,15 @@ public class NetzDAO implements Serializable {
             return "uebersichtBergungErfolg.xhtml?faces-redirect=true";
         }
         else {
-            return "index.xhtml?faces-redirect=true"; // oder eine andere Standardseite
+            return "index.xhtml?faces-redirect=true";
         }
     }
-
-
     
-    //Zur Prüfung der Person bei der Anmeldung zur Bergung des Netzes.
+    /**
+     * Prüft, ob eine Person zur Bergung eines Netzes gültig ist.
+     * Entweder über ID oder durch vollständige Eingabe der Personendaten.
+     * Legt bei Bedarf eine neue Person an.
+     */
     public void checkPerson() {
         EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
@@ -282,6 +310,5 @@ public class NetzDAO implements Serializable {
             em.close();
         }
     }
-
 }
 

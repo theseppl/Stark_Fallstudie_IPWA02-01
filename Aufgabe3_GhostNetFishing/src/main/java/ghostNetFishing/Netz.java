@@ -7,10 +7,16 @@ import java.util.Locale;
 import jakarta.inject.Named;
 import jakarta.persistence.*;
 
+/**
+ * Repräsentiert ein gemeldetes Geisternetz mit geografischen Koordinaten,
+ * Statusinformationen und beteiligten Personen.
+ */
 
 @Entity
 @Named("net")
 public class Netz {
+	
+	// Primärschlüssel, automatisch generiert
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -29,10 +35,12 @@ public class Netz {
     private LocalDate notificationDate = LocalDate.now();
     private String status = "gemeldet";
     
+    // Beziehung zur meldenden Person
     @ManyToOne
     @JoinColumn(name = "reportingPerson_ID")
     private Person reportingPerson;
     
+    // Beziehung zur bergenden Person
     @ManyToOne
     @JoinColumn(name = "recoveringPerson_ID")
     private Person recoveringPerson;
@@ -119,6 +127,7 @@ public class Netz {
 		this.eastWest = eastWest;
 	}
 
+	// Gibt das Meldedatum im deutschen Format zurück.
 	public String getNotificationDate () {
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy").withLocale(Locale.GERMAN);
 	    return notificationDate.format(formatter);

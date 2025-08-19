@@ -7,12 +7,18 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
+/**
+ * DAO-Klasse zur Verwaltung von Person-Objekten.
+ */
+
 @Named("personDAO")
 @RequestScoped
 public class PersonDAO {
-	private Person person = new Person(); // wird z. B. über ein Formular gefüllt
-	private String personId; //zur Prüfung ob ID bereits vorhanden
-	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit"); //Eine EntityManagerFactory für Klasse
+	private Person person = new Person();
+	private String personId; 
+	
+	// Statische EntityManagerFactory für den Zugriff auf die Persistence Unit
+	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ghostNetPersistenceUnit");
 	
 	public String getPersonId() {
 	    return personId;
@@ -26,17 +32,18 @@ public class PersonDAO {
         return person;
     }
 
+    // Persistiert die aktuelle Person in der Datenbank.
     public String setPerson() {
         EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
 
         try {
             t.begin();
-            em.persist(person); // oder em.merge(person), falls es schon gespeichert ist
+            em.persist(person); 
             t.commit();
         } catch (Exception e) {
             if (t.isActive()) t.rollback();
-            e.printStackTrace(); // oder logger.error(...)
+            e.printStackTrace(); 
         } finally {
             em.close();
         }

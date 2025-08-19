@@ -7,18 +7,24 @@ import jakarta.inject.Named;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 
-
+/**
+ * Entität zur Repräsentation einer Person, die ein Netz meldet oder birgt.
+ */
 @Entity
 @Named("person")
 public class Person {
+	// Automatische ID-Vergabe
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long ID;
-	
 	private String lastName;
 	private String firstName;
 	private String phoneNumber;
 
+    /**
+     * Beziehung zu gemeldeten Netzen.
+     * Eine Person kann mehrere Netze gemeldet haben.
+     */
 	@OneToMany(mappedBy = "reportingPerson", cascade = CascadeType.ALL)
 	private List<Netz> reportedNets = new ArrayList<>();
 	
@@ -48,13 +54,10 @@ public class Person {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
 	public List<Netz> getReportedNets() {
 		return reportedNets;
 	}
-
 	public void setReportedNets(List<Netz> reportedNets) {
 		this.reportedNets = reportedNets;
 	}
-	
 }
