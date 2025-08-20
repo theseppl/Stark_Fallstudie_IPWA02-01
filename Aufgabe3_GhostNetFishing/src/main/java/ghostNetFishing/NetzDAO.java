@@ -152,14 +152,6 @@ public class NetzDAO implements Serializable {
 
         // Übergabe von Daten für die nächste Seite via Flash-Context
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("newPersonId", newPersonId);
-//        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("northSouth", net.getNorthSouth());
-//        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latDegree", net.getLatituteDegree());
-//        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latMinute", net.getLatituteMinute());
-//        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("latSeconds", net.getLatituteSeconds());
-//        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("eastWest", net.getEastWest());
-//        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longDegree", net.getLongituteDegree());
-//        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longMinute", net.getLongituteMinute());
-//        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longSeconds", net.getLongituteSeconds());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("locationLat", net.getNorthSouth() + " " +
                 net.getLatituteDegree() + "°" + net.getLatituteMinute() + "'" + net.getLatituteSeconds() + "″");
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("locationLong", net.getEastWest() + " " +
@@ -235,9 +227,9 @@ public class NetzDAO implements Serializable {
                 fc.getExternalContext().getFlash().put("netzSize", managedNet.getNetSize());
                 fc.getExternalContext().getFlash().put("notificationDate", managedNet.getNotificationDate());
                 fc.getExternalContext().getFlash().put("locationLat", managedNet.getNorthSouth() + " " +
-                    managedNet.getLatituteDegree() + "°" + managedNet.getLatituteMinute() + "'" + managedNet.getLatituteSeconds());
+                    managedNet.getLatituteDegree() + "°" + managedNet.getLatituteMinute() + "'" + managedNet.getLatituteSeconds() + "″");
                 fc.getExternalContext().getFlash().put("locationLong", managedNet.getEastWest() + " " +
-                    managedNet.getLongituteDegree() + "°" + managedNet.getLongituteMinute() + "'" + managedNet.getLongituteSeconds());
+                    managedNet.getLongituteDegree() + "°" + managedNet.getLongituteMinute() + "'" + managedNet.getLongituteSeconds() + "″");
             }
             t.commit();
         } catch (Exception e) {
