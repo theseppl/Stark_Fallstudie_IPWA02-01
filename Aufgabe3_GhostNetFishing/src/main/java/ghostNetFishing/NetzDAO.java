@@ -161,9 +161,9 @@ public class NetzDAO implements Serializable {
 //        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longMinute", net.getLongituteMinute());
 //        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("longSeconds", net.getLongituteSeconds());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("locationLat", net.getNorthSouth() + " " +
-                net.getLatituteDegree() + "°" + net.getLatituteMinute() + "'" + net.getLatituteSeconds());
+                net.getLatituteDegree() + "°" + net.getLatituteMinute() + "'" + net.getLatituteSeconds() + "″");
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("locationLong", net.getEastWest() + " " +
-                net.getLongituteDegree() + "°" + net.getLongituteMinute() + "'" + net.getLongituteSeconds());
+                net.getLongituteDegree() + "°" + net.getLongituteMinute() + "'" + net.getLongituteSeconds()+ "″");
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("netSize", net.getNetSize());
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("sightingDate", net.getNotificationDate ());
 

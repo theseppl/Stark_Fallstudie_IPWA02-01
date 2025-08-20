@@ -28,9 +28,10 @@
 				styleClass="logoTitle" />
 		</h:panelGrid>
 	</div>
- 
+
 	<p:card style="width: 90%; padding: 50px;">
 		<h:form>
+			<h1>Übersicht ihrer Netzmeldung</h1>
 			<!-- Anzeige der übergebenen Daten aus dem Flash-Scope -->
 			<h:panelGroup rendered="#{flash.newPersonId != null}">
 				<h:outputText
@@ -42,56 +43,22 @@
 					value="Willkommen zurück! Ihre Personen-ID: #{flash.existingPersonId}" />
 			</h:panelGroup>
 			<br />
-			<h:outputText
-				value="Breitengrad: #{flash.northSouth} #{flash.latDegree}° #{flash.latMinute}' #{flash.latSeconds}″" />
 			<br />
-			<h:outputText
-				value="Längengrad: #{flash.eastWest} #{flash.longDegree}° #{flash.longMinute}' #{flash.longSeconds}″" />
+			<h:outputText value="Breitengrad: #{flash.locationLat}" />
 			<br />
-			<h:outputText value="Netzgröße: #{flash.netSize} m²" />
+			<br />
+			<h:outputText value="Längengrad: #{flash.locationLong}" />
+			<br />
+			<br />
+			<h:outputText value="Netzgröße (m²): #{flash.netSize}" />
+			<br />
 			<br />
 			<h:outputText value="Sichtungsdatum: #{flash.sightingDate}" />
 			<br />
-
+			<br />
+			<p:separator />
 			<!-- Button zum Abbrechen und Rückkehr zur Startseite -->
 			<p:commandButton value="Zur Startseite"
-				action="index.xhtml?faces-redirect=true" />
-		</h:form>
-	</p:card>
-
-	<p:card style="width: 90%; padding: 50px;">
-		<h:form>
-			<h1>Übersicht ihrer Netzmeldung</h1>
-
-			<!-- Anzeige der übergebenen Daten aus dem Flash-Scope -->
-			<h:panelGrid columns="2" cellpadding="5">
-				<h:panelGroup rendered="#{flash.newPersonId != null}">
-					<h:outputLabel value="Ihre neue Personen-ID lautet:" />
-					<h:outputText value="#{flash.newPersonId}" />
-				</h:panelGroup>
-
-				<h:panelGroup rendered="#{flash.existingPersonId != null}">
-					<h:outputLabel value="Willkommen zurück! Ihre Personen-ID:" />
-					<h:outputText value="#{flash.existingPersonId}" />
-				</h:panelGroup>
-				
-				<h:outputLabel value="Breitengrad:" />
-				<h:outputText value="#{flash.locationLat}" />
-
-				<h:outputLabel value="Längengrad:" />
-				<h:outputText value="#{flash.locationLong}" />
-
-				<h:outputLabel value="Netzgröße (m²):" />
-				<h:outputText value="#{flash.netSize}" />
-
-				<h:outputLabel value="Sichtungsdatum:" />
-				<h:outputText value="#{flash.sightingDate}" />
-			</h:panelGrid>
-
-			<p:separator />
-
-			<!-- Button zum Abbrechen und Rückkehr zur Startseite -->
-			<p:commandButton value="Zurück zur Startseite"
 				action="index.xhtml?faces-redirect=true" />
 		</h:form>
 	</p:card>
