@@ -155,8 +155,8 @@
 				<!-- Option zur anonymen Meldung -->
 				<p:card style="margin: 20px 0">
 					<h4>Wollen Sie das Geisternetz anonym melden?</h4>
-					<p:selectBooleanButton value="#{netzDAO.anonym}" onLabel="Ja"
-						offLabel="Nein" onIcon="pi pi-check" offIcon="pi pi-times"
+					<p:selectBooleanButton value="#{netzDAO.anonym}" onLabel="Nein"
+						offLabel="Ja" onIcon="pi pi-thumbs-up" offIcon="pi pi-times"
 						style="width:6rem">
 						<p:ajax update="personPanel" />
 					</p:selectBooleanButton>
