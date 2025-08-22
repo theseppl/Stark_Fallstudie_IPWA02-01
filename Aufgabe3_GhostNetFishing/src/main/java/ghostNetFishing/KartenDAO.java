@@ -45,7 +45,7 @@ public class KartenDAO implements Serializable {
         circleModel = new DefaultMapModel<>();
 
         // Abruf aller gemeldeten Netze
-        List<Netz> nets = netzDAO.getAllNets("gemeldet");
+        List<Netz> nets = netzDAO.getNetListByStatus("gemeldet");
 
         // Erstellung eines Kreises für jedes Netz
         for (Netz nets1 : nets) {

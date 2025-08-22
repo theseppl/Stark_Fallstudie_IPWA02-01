@@ -163,7 +163,7 @@ public class NetzDAO implements Serializable {
     }
     
     //  Liefert alle Netze mit einem bestimmten Status aus der Datenbank.
-    public List<Netz> getAllNets(String status) {
+    public List<Netz> getNetListByStatus(String status) {
         EntityManager em = emf.createEntityManager();
         List<Netz> nets = null;
 

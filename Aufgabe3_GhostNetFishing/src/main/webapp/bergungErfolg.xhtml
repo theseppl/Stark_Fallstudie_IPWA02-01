@@ -109,7 +109,7 @@
 					<p:messages autoUpdate="true" showDetail="false" />
 
 					<!-- Tabelle mit Netzen, die zur Bergung angemeldet sind -->
-					<p:dataTable value="#{netzDAO.getAllNets('Bergung bevorstehend')}"
+					<p:dataTable value="#{netzDAO.getNetListByStatus('Bergung bevorstehend')}"
 						var="nets"
 						style="width: 100%; max-width: 1000px; margin: 20px auto"
 						paginator="true" rows="10">

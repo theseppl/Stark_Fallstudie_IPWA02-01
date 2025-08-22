@@ -124,7 +124,7 @@
 					<p:messages autoUpdate="true" showDetail="false" />
 
 					<!-- Tabelle mit allen gemeldeten Netzen -->
-					<p:dataTable value="#{netzDAO.getAllNets('gemeldet')}" var="nets"
+					<p:dataTable value="#{netzDAO.getNetListByStatus('gemeldet')}" var="nets"
 						style="width: 100%; max-width: 1000px; margin: 20px auto"
 						paginator="true" rows="10">
 
